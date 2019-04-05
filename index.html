@@ -7,8 +7,12 @@
   <title>Dota 2 Counter Picker</title>
   <meta name="description" content="Dota 2 Counter Picker">
   <meta name="author" content="Tom Dobrow">
-
+  
   <link rel="stylesheet" href="index.css?v=1.0">
+  
+</head>
+
+<body>
   
   <script type="text/javascript">
     
@@ -27,13 +31,9 @@
       console.log(textBoxValue);
       readFile("matchData.tsv")
     }
-    
-    
+  
   </script>   
-
-</head>
-
-<body>
+  
   <input name="textbox1" id="textbox1" type="text" />
   <input name="buttonExecute" onclick="getCounterPick(document.getElementById('textbox1').value)" type="button" value="Execute" />
 </body>
