@@ -10,17 +10,22 @@
 
   <link rel="stylesheet" href="index.css?v=1.0">
   
-  <script type="text/javascript">
+<!--   <script type="text/javascript">
     function getCounterPick(textBoxValue){
       alert(textBoxValue.value);    // To get Text Box Value(Text)
       alert(textBoxValue.id);      // To get Text Box Id like txtSearch
     }
-  </script>   
+  </script>    -->
 
 </head>
 
 <body>
-  <script src="js/scripts.js"></script>
+  <script src="js/scripts.js">
+    function getCounterPick(textBoxValue){
+      alert(textBoxValue.value);    // To get Text Box Value(Text)
+      alert(textBoxValue.id);      // To get Text Box Id like txtSearch
+    }
+  </script>
   <input name="textbox1" id="textbox1" type="text" />
   <input name="buttonExecute" onclick="getCounterPick(document.getElementById('textbox1').value)" type="button" value="Execute" />
 </body>
