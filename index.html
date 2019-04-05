@@ -11,10 +11,23 @@
   <link rel="stylesheet" href="index.css?v=1.0">
   
   <script type="text/javascript">
+    
+    // Requiring fs module in which  
+    // readFile function is defined. 
+    function readFile(filename) {
+      const fs = require('fs') 
+      fs.readFile('data.tsv', (err, data) => { 
+          if (err) throw err; 
+          console.log(data.toString()); 
+      })   
+    }
+    
     function getCounterPick(textBoxValue){
       console.log("hello");
       console.log(textBoxValue);
     }
+    
+    
   </script>   
 
 </head>
