@@ -9,34 +9,13 @@
   <meta name="author" content="Tom Dobrow">
   
   <link rel="stylesheet" href="index.css?v=1.0">
+  
   <script src="https://d3js.org/d3.v5.min.js"></script>
+  <script type="text/javascript" src="counterPicker.js"></script>
   
 </head>
 
 <body>
-  
-  <script type="text/javascript">
-    
-    // Requiring fs module in which  
-    // readFile function is defined. 
-    
-    function readFile(filename) {
-      console.log("inside readfile");
-      data = d3.tsv(filename, function(data) {
-          console.log("Inside d3 funtion");
-          console.log(data);
-          return data;
-      });  
-    }
-    
-    function getCounterPick(textBoxValue){
-      console.log("hello");
-      console.log(textBoxValue);
-      readFile("matchData.tsv")
-    }
-  
-  </script>   
-  
   <input name="textbox1" id="textbox1" type="text" />
   <input name="buttonExecute" onclick="getCounterPick(document.getElementById('textbox1').value)" type="button" value="Execute" />
 </body>
