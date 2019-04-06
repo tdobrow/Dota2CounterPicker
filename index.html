@@ -22,9 +22,10 @@
     
     function readFile(filename) {
       console.log("inside readfile");
-      d3.tsv(filename, function(data) {
+      data = d3.tsv(filename, function(data) {
           console.log("Inside d3 funtion");
           console.log(data);
+          return data;
       });  
     }
     
