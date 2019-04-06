@@ -9,6 +9,7 @@
   <meta name="author" content="Tom Dobrow">
   
   <link rel="stylesheet" href="index.css?v=1.0">
+  <script src="https://d3js.org/d3.v5.min.js"></script>
   
 </head>
 
@@ -18,12 +19,12 @@
     
     // Requiring fs module in which  
     // readFile function is defined. 
+    
     function readFile(filename) {
-      const fs = require('fs') 
-      fs.readFile(filename, (err, data) => { 
-          if (err) throw err; 
-          console.log(data.toString()); 
-      })   
+      d3.tsv(filename, function(data) {
+          console.log("Inside d3 funtion");
+          console.log(data);
+      });  
     }
     
     function getCounterPick(textBoxValue){
