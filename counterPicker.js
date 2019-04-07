@@ -72,7 +72,7 @@ function dataForHeroMatchup(heroString1, heroString2) {
 			hero_two_wins += 1;
 		}
 
-		if (!((radiantTeamArray.contains(heroString1) && direTeamArray.contains(heroString2)) || (direTeamArray.contains(heroString1) && radiantTeamArray.contains(heroString2))) {
+		if (!((radiantTeamArray.contains(heroString1) && direTeamArray.contains(heroString2)) || (direTeamArray.contains(heroString1) && radiantTeamArray.contains(heroString2)))) {
 			continue;
 		} else {
 			num_total_games_together += 1;
