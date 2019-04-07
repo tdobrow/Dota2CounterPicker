@@ -16,7 +16,7 @@ function getCounterPick(textBoxValue){
 }
 
 function didHeroWinMatch(heroString, tsvDataRow) {
-	return (tsvDataRow["radiantTeamArray"].contains(heroString) and tsvDataRow["radiantWon"]) or (tsvDataRow["direTeamArray"].contains(heroString) and !tsvDataRow["radiantWon"])
+	return (tsvDataRow["radiantTeamArray"].contains(heroString) && tsvDataRow["radiantWon"]) || (tsvDataRow["direTeamArray"].contains(heroString) && !tsvDataRow["radiantWon"]);
 }
 
 //  Given 2 Heroes, shows stats between the two
@@ -27,11 +27,11 @@ function dataForHeroMatchup(heroString1, heroString2) {
 	if (!HEROES.values().contains(heroString1)) {
 		console.log("Invalid hero string: " + heroString1);
 		return;
-  }
+  	}
 	if (!HEROES.values().contains(heroString2)) {
 		console.log("Invalid hero string: " + heroString2);
 		return;
-  }
+  	}
 
 	num_total_games_together = 0
 	hero_one_wins_against_hero_two = 0.0
@@ -42,55 +42,54 @@ function dataForHeroMatchup(heroString1, heroString2) {
 	hero_two_num_picked = 0
 	hero_two_wins = 0.0
   
-  // was line now is data
-  data = d3.tsv("matchData.tsv", function(data) {
-      hero_one_won = didHeroWinMatch(heroString1, data);
-			hero_two_won = didHeroWinMatch(heroString2, data);
+	// was line now is data
+	data = d3.tsv("matchData.tsv", function(data) {
+		hero_one_won = didHeroWinMatch(heroString1, data);
+		hero_two_won = didHeroWinMatch(heroString2, data);
 
-      // this probs won't work
-			radiantTeamArray = data["radiantTeamArray"].split(',');
-			direTeamArray = line["direTeamArray"].split(',');
+		// this probs won't work
+		radiantTeamArray = data["radiantTeamArray"].split(',');
+		direTeamArray = line["direTeamArray"].split(',');
 
-			for(i=0; i<radiantTeamArray.length; i++) {
-				radiantTeamArray[i] = radiantTeamArray[i].strip().replace("'", "").replace('[', '').replace(']', '');
-      }
-			for(i=0; i<direTeamArray.length; i++) {
-				direTeamArray[i] = direTeamArray[i].strip().replace("'", "").replace('[', '').replace(']', '');
-      }
-    
-			if (radiantTeamArray.contains(heroString1) or direTeamArray.contains(heroString1)) {
-				hero_one_num_picked += 1;
-      }
+		for(i=0; i<radiantTeamArray.length; i++) {
+			radiantTeamArray[i] = radiantTeamArray[i].strip().replace("'", "").replace('[', '').replace(']', '');
+		}
+		for(i=0; i<direTeamArray.length; i++) {
+			direTeamArray[i] = direTeamArray[i].strip().replace("'", "").replace('[', '').replace(']', '');
+		}
+
+		if (radiantTeamArray.contains(heroString1) or direTeamArray.contains(heroString1)) {
+			hero_one_num_picked += 1;
+		}
+		if hero_one_won {
+			hero_one_wins += 1;
+		}
+
+		if (radiantTeamArray.contains(heroString2) || heroString2 in direTeamArray) {
+			hero_two_num_picked += 1;
+		}
+		if hero_two_won {
+			hero_two_wins += 1;
+		}
+
+		if !((radiantTeamArray.contains(heroString1) && direTeamArray.contains(heroString2)) || (direTeamArray.contains(heroString1) && radiantTeamArray.contains(heroString2)) {
+			continue;
+		} else {
+			num_total_games_together += 1;
 			if hero_one_won {
-				hero_one_wins += 1;
-      }
-
-			if (radiantTeamArray.contains(heroString2) or heroString2 in direTeamArray) {
-				hero_two_num_picked += 1;
-      }
-			if hero_two_won {
-				hero_two_wins += 1;
-      }
-
-			if !((radiantTeamArray.contains(heroString1) and direTeamArray.contains(heroString2)) or (direTeamArray.contains(heroString1) and radiantTeamArray.contains(heroString2)) {
-				continue;
-      } else {
-				num_total_games_together += 1;
-				if hero_one_won {
-					hero_one_wins_against_hero_two += 1;
-        }
-      }
-      return data;
-  });  
-
+				hero_one_wins_against_hero_two += 1;
+		}
+	      }
+	      return data;
+	  });  
 	if num_total_games_together > 0 {
 		console.log("Number of Total Games Together: " + str(num_total_games_together));
 		console.log(heroString1.upper() + " winrate over " + heroString2.upper() + ": " + str(100*hero_one_wins_against_hero_two/num_total_games_together) + "%");
 		console.log(heroString1.upper() + " winrate independent of  " + heroString2.upper() + ": " + str(100*hero_one_wins/hero_one_num_picked) + "%");
 		console.log(heroString2.upper() + " winrate independent of  " + heroString1.upper() + ": " + str(100*hero_two_wins/hero_two_num_picked) + "%");
-  } else {
+	} else {
 		console.log("No match data between these two heroes");
-  }
+	}
 }
 
 
