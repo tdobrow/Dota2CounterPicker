@@ -58,7 +58,7 @@ function dataForHeroMatchup(heroString1, heroString2) {
 			direTeamArray[i] = direTeamArray[i].strip().replace("'", "").replace('[', '').replace(']', '');
 		}
 
-		if (radiantTeamArray.contains(heroString1) or direTeamArray.contains(heroString1)) {
+		if (radiantTeamArray.contains(heroString1) || direTeamArray.contains(heroString1)) {
 			hero_one_num_picked += 1;
 		}
 		if hero_one_won {
