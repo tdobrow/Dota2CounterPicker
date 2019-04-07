@@ -61,14 +61,14 @@ function dataForHeroMatchup(heroString1, heroString2) {
 		if (radiantTeamArray.contains(heroString1) || direTeamArray.contains(heroString1)) {
 			hero_one_num_picked += 1;
 		}
-		if hero_one_won {
+		if (hero_one_won) {
 			hero_one_wins += 1;
 		}
 
 		if (radiantTeamArray.contains(heroString2) || heroString2 in direTeamArray) {
 			hero_two_num_picked += 1;
 		}
-		if hero_two_won {
+		if (hero_two_won) {
 			hero_two_wins += 1;
 		}
 
@@ -82,7 +82,7 @@ function dataForHeroMatchup(heroString1, heroString2) {
 	      }
 	      return data;
 	  });  
-	if num_total_games_together > 0 {
+	if (num_total_games_together > 0) {
 		console.log("Number of Total Games Together: " + str(num_total_games_together));
 		console.log(heroString1.upper() + " winrate over " + heroString2.upper() + ": " + str(100*hero_one_wins_against_hero_two/num_total_games_together) + "%");
 		console.log(heroString1.upper() + " winrate independent of  " + heroString2.upper() + ": " + str(100*hero_one_wins/hero_one_num_picked) + "%");
