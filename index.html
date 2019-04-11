@@ -138,10 +138,6 @@
     function builHeroToStatsDictionary(heroString) {
     	data = {};
       line = d3.tsv("matchData.tsv", function(line) {
-
-    	//with open("data.tsv") as tsv:
-    	//	for line in csv.reader(tsv, dialect="excel-tab"):
-
     			radiantTeamArray = line[2].split(',');
     			direTeamArray = line[3].split(',');
 
@@ -183,49 +179,53 @@
               } else {
     						newData.append(0.0);
               }
-    				data[hero] = newData;
-          }
-    			for (i=0; i<direTeamArray.length; i++) {
-    				hero = hero.strip().replace("'", "").replace('[', '').replace(']', '');
-    				if (hero == heroString) {
-    					continue;
+    				  data[hero] = newData;
             }
-    				isHeroOnEnemyTeam = (line[2].contains(heroString));
+            for (i=0; i<direTeamArray.length; i++) {
+              hero = hero.strip().replace("'", "").replace('[', '').replace(']', '');
+              if (hero == heroString) {
+                continue;
+              }
+              isHeroOnEnemyTeam = (line[2].contains(heroString));
 
-    				if (Object.keys(data).contains(hero)) {
-    					newData = data[hero];
-    					if (isHeroOnEnemyTeam) {
-    						newData[0] += 1;
-    						if (line[1] == 'False') {
-    							newData[1] += 1;
+              if (Object.keys(data).contains(hero)) {
+                newData = data[hero];
+                if (isHeroOnEnemyTeam) {
+                  newData[0] += 1;
+                  if (line[1] == 'False') {
+                    newData[1] += 1;
+                  }
                 }
-              }
-    					newData[2] += 1;
-    					if (line[1] == 'False') {
-    						newData[3] += 1;
-              }
-            } else { // First time gathering data for this hero
-    					newData = [];
-    					if (isHeroOnEnemyTeam) {
-    						newData.push(1.0);
-    						if (line[1] == 'True') {
-    							newData.append(1.0);
+                newData[2] += 1;
+                if (line[1] == 'False') {
+                  newData[3] += 1;
+                }
+              } else { // First time gathering data for this hero
+                newData = [];
+                if (isHeroOnEnemyTeam) {
+                  newData.push(1.0);
+                  if (line[1] == 'True') {
+                    newData.append(1.0);
+                  } else {
+                    newData.append(0.0);
+                  }
                 } else {
-    							newData.append(0.0);
+                  newData.append(0.0);
+                  newData.append(0.0);
                 }
-              } else {
-    						newData.append(0.0);
-    						newData.append(0.0);
+                newData.append(1.0);
+                if (line[1] == 'False') {
+                  newData.append(1.0);
+                } else {
+                  newData.append(0.0);
+                }
               }
-    					newData.append(1.0);
-    					if (line[1] == 'False') {
-    						newData.append(1.0);
-              } else {
-    						newData.append(0.0);
-              }
-    				data[hero] = newData;
-         }
-    	return data;
+              data[hero] = newData;
+           }
+        }
+    	  return line;
+      }
+      return data;
     }
 
     function weighFunction(numGamesAgainst, numWinsAgainst) {
