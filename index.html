@@ -120,11 +120,11 @@
     	heroCount = 0;
     	i = 0;
     	while(True) {
-    		if newData[sortedKeys[i]] < 0 {
+    		if (newData[sortedKeys[i]] < 0) {
     			return;
         }  
     		for (i=0; i<newData[sortedKeys[i]].lenth; i++) {
-    			if heroCount >= numTopHeroes {
+    			if (heroCount >= numTopHeroes) {
     				return;
           }
     			console.log(newData[sortedKeys[i]][i];
