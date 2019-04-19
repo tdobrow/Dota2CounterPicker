@@ -43,7 +43,7 @@
       console.log(heroString);
       console.log(tsvDataRow);
       console.log(convertStringToArray(tsvDataRow["radiantTeamArray"]));
-      return ( convertStringToArray(tsvDataRow["radiantTeamArray"]).includes(heroString) && tsvDataRow["radiantWon"]) || (convertStringToArray(tsvDataRow["direTeamArray"]).includes(heroString) && !tsvDataRow["radiantWon"]);
+      return ( tsvDataRow["radiantTeamArray"].includes(heroString) && tsvDataRow["radiantWon"]) || (tsvDataRow["direTeamArray"].includes(heroString) && !tsvDataRow["radiantWon"]);
     }
 
     //  Given 2 Heroes, shows stats between the two
