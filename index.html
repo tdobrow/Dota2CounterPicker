@@ -40,6 +40,10 @@
     }
 
     function didHeroWinMatch(heroString, tsvDataRow) {
+      console.log("inside didHeroWinMatch");
+      console.log(heroString);
+      console.log(tsvDataRow);
+      console.log(convertStringToArray(tsvDataRow["radiantTeamArray"]));
       return ( convertStringToArray(tsvDataRow["radiantTeamArray"]).includes(heroString) && tsvDataRow["radiantWon"]) || (convertStringToArray(tsvDataRow["direTeamArray"]).includes(heroString) && !tsvDataRow["radiantWon"]);
     }
 
