@@ -47,11 +47,11 @@
     // This method answers "How is hero1 agaisnt hero2"?
     function dataForHeroMatchup(heroString1, heroString2) {
 
-      if (!HEROES.values().includes(heroString1)) {
+      if (!Object.values(HEROES).includes(heroString1)) {
         console.log("Invalid hero string: " + heroString1);
         return;
       }
-      if (!HEROES.values().includes(heroString2)) {
+      if (!Object.values(HEROES).includes(heroString2)) {
         console.log("Invalid hero string: " + heroString2);
         return;
       }
