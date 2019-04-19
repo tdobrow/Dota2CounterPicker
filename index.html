@@ -17,9 +17,8 @@
     
     function convertStringToArray(arrayAsString) {
       return arrayAsString.split().map(function(e) {
-        return e.replace("[", "").replace("]", "").replace(" ", "").replace("'", "").replace("'", "");
+        return e.replace("[", "").replace("]", "").replace(" ", "").replace(/'/g, '');
       }); 
-      
     }
     
     function readFile(filename) {
