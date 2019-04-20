@@ -25,7 +25,11 @@
           url: filename,
           dataType: "text",
           async: false,
-          success: function(csv) {arraydata = $.csv.toArrays(csv,{separator:'\t'}); }
+          success: function(csv) {    
+            console.log(csv);
+            console.log(filename);
+            //arraydata = $.csv.toArrays(csv,{separator:'\t'});
+          }
         });
     console.log(arraydata);
     return arraydata;
