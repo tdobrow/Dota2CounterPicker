@@ -16,246 +16,246 @@
   <script src="https://d3js.org/d3.v5.min.js"></script>
   <script type="text/javascript">
   
-    var fs = require('fs');
+//     var fs = require('fs');
  
-    HEROES = {'25': 'lina', '26': 'lion', '27': 'shadow_shaman', '20': 'vengefulspirit', '21': 'windrunner', '22': 'zuus', '23': 'kunkka', '28': 'slardar', '29': 'tidehunter', '4': 'bloodseeker', '8': 'juggernaut', '59': 'huskar', '58': 'enchantress', '55': 'dark_seer', '54': 'life_stealer', '57': 'omniknight', '56': 'clinkz', '51': 'rattletrap', '50': 'dazzle', '53': 'furion', '52': 'leshrac', '88': 'nyx_assassin', '89': 'naga_siren', '111': 'oracle', '110': 'phoenix', '113': 'arc_warden', '112': 'winter_wyvern', '82': 'meepo', '83': 'treant', '80': 'lone_druid', '81': 'chaos_knight', '86': 'rubick', '87': 'disruptor', '84': 'ogre_magi', '85': 'undying', '3': 'bane', '7': 'earthshaker', '108': 'abyssal_underlord', '109': 'terrorblade', '102': 'abaddon', '103': 'elder_titan', '100': 'tusk', '101': 'skywrath_mage', '106': 'ember_spirit', '107': 'earth_spirit', '104': 'legion_commander', '105': 'techies', '39': 'queenofpain', '38': 'beastmaster', '33': 'enigma', '32': 'riki', '31': 'lich', '30': 'witch_doctor', '37': 'warlock', '36': 'necrolyte', '35': 'sniper', '34': 'tinker', '60': 'night_stalker', '61': 'broodmother', '62': 'bounty_hunter', '63': 'weaver', '64': 'jakiro', '65': 'batrider', '66': 'chen', '67': 'spectre', '68': 'ancient_apparition', '69': 'doom_bringer', '2': 'axe', '6': 'drow_ranger', '99': 'bristleback', '98': 'shredder', '91': 'wisp', '90': 'keeper_of_the_light', '93': 'slark', '92': 'visage', '95': 'troll_warlord', '94': 'medusa', '97': 'magnataur', '96': 'centaur', '11': 'nevermore', '10': 'morphling', '13': 'puck', '12': 'phantom_lancer', '15': 'razor', '14': 'pudge', '17': 'storm_spirit', '16': 'sand_king', '19': 'tiny', '18': 'sven', '48': 'luna', '49': 'dragon_knight', '46': 'templar_assassin', '47': 'viper', '44': 'phantom_assassin', '45': 'pugna', '42': 'skeleton_king', '43': 'death_prophet', '40': 'venomancer', '41': 'faceless_void', '1': 'antimage', '5': 'crystal_maiden', '9': 'mirana', '77': 'lycan', '76': 'obsidian_destroyer', '75': 'silencer', '74': 'invoker', '73': 'alchemist', '72': 'gyrocopter', '71': 'spirit_breaker', '70': 'ursa', '79': 'shadow_demon', '78': 'brewmaster', '114': 'monkey_king', '120': 'pangolier', '119': 'dark_willow', '121': 'grimstroke'}
+//     HEROES = {'25': 'lina', '26': 'lion', '27': 'shadow_shaman', '20': 'vengefulspirit', '21': 'windrunner', '22': 'zuus', '23': 'kunkka', '28': 'slardar', '29': 'tidehunter', '4': 'bloodseeker', '8': 'juggernaut', '59': 'huskar', '58': 'enchantress', '55': 'dark_seer', '54': 'life_stealer', '57': 'omniknight', '56': 'clinkz', '51': 'rattletrap', '50': 'dazzle', '53': 'furion', '52': 'leshrac', '88': 'nyx_assassin', '89': 'naga_siren', '111': 'oracle', '110': 'phoenix', '113': 'arc_warden', '112': 'winter_wyvern', '82': 'meepo', '83': 'treant', '80': 'lone_druid', '81': 'chaos_knight', '86': 'rubick', '87': 'disruptor', '84': 'ogre_magi', '85': 'undying', '3': 'bane', '7': 'earthshaker', '108': 'abyssal_underlord', '109': 'terrorblade', '102': 'abaddon', '103': 'elder_titan', '100': 'tusk', '101': 'skywrath_mage', '106': 'ember_spirit', '107': 'earth_spirit', '104': 'legion_commander', '105': 'techies', '39': 'queenofpain', '38': 'beastmaster', '33': 'enigma', '32': 'riki', '31': 'lich', '30': 'witch_doctor', '37': 'warlock', '36': 'necrolyte', '35': 'sniper', '34': 'tinker', '60': 'night_stalker', '61': 'broodmother', '62': 'bounty_hunter', '63': 'weaver', '64': 'jakiro', '65': 'batrider', '66': 'chen', '67': 'spectre', '68': 'ancient_apparition', '69': 'doom_bringer', '2': 'axe', '6': 'drow_ranger', '99': 'bristleback', '98': 'shredder', '91': 'wisp', '90': 'keeper_of_the_light', '93': 'slark', '92': 'visage', '95': 'troll_warlord', '94': 'medusa', '97': 'magnataur', '96': 'centaur', '11': 'nevermore', '10': 'morphling', '13': 'puck', '12': 'phantom_lancer', '15': 'razor', '14': 'pudge', '17': 'storm_spirit', '16': 'sand_king', '19': 'tiny', '18': 'sven', '48': 'luna', '49': 'dragon_knight', '46': 'templar_assassin', '47': 'viper', '44': 'phantom_assassin', '45': 'pugna', '42': 'skeleton_king', '43': 'death_prophet', '40': 'venomancer', '41': 'faceless_void', '1': 'antimage', '5': 'crystal_maiden', '9': 'mirana', '77': 'lycan', '76': 'obsidian_destroyer', '75': 'silencer', '74': 'invoker', '73': 'alchemist', '72': 'gyrocopter', '71': 'spirit_breaker', '70': 'ursa', '79': 'shadow_demon', '78': 'brewmaster', '114': 'monkey_king', '120': 'pangolier', '119': 'dark_willow', '121': 'grimstroke'}
 
-    // Takes in a string version of array and converts to array of string elements.
-    function convertStringToArray(arrayAsString) {
-      return arrayAsString.split(",").map(function(e) {
-        return e.replace("[", "").replace("]", "").replace(" ", "").replace(/'/g, '');
-      }); 
-    }
-    function getCounterPick(textBoxValue){
-      console.log("hello");
-      console.log(textBoxValue);
-      var contents = fs.readFileSync('matchData.tsv', 'utf8');
-      console.log(contents);
+//     // Takes in a string version of array and converts to array of string elements.
+//     function convertStringToArray(arrayAsString) {
+//       return arrayAsString.split(",").map(function(e) {
+//         return e.replace("[", "").replace("]", "").replace(" ", "").replace(/'/g, '');
+//       }); 
+//     }
+//     function getCounterPick(textBoxValue){
+//       console.log("hello");
+//       console.log(textBoxValue);
+//       var contents = fs.readFileSync('matchData.tsv', 'utf8');
+//       console.log(contents);
     
-      //dataForHeroMatchup('ursa', 'razor')
-    }
-    function didHeroWinMatch(heroString, tsvDataRow) {
-      console.log("hero string: " + heroString);
-      result = (tsvDataRow["radiantTeamArray"].includes(heroString) && tsvDataRow["radiantWon"]) || (tsvDataRow["direTeamArray"].includes(heroString) && !tsvDataRow["radiantWon"]);
-      console.log(result);
-      return result;
-    }
-    //  Given 2 Heroes, shows stats between the two
-    // 	Output is: Num Games, Winrate of Hero1 against Hero2, Hero1 independent winrate, Hero2 independent winrate
-    // This method answers "How is hero1 agaisnt hero2"?
-    function dataForHeroMatchup(heroString1, heroString2) {
-      if (!Object.values(HEROES).includes(heroString1)) {
-        console.log("Invalid hero string: " + heroString1);
-        return;
-      }
-      if (!Object.values(HEROES).includes(heroString2)) {
-        console.log("Invalid hero string: " + heroString2);
-        return;
-      }
-      num_total_games_together = 0
-      hero_one_wins_against_hero_two = 0.0
+//       //dataForHeroMatchup('ursa', 'razor')
+//     }
+//     function didHeroWinMatch(heroString, tsvDataRow) {
+//       console.log("hero string: " + heroString);
+//       result = (tsvDataRow["radiantTeamArray"].includes(heroString) && tsvDataRow["radiantWon"]) || (tsvDataRow["direTeamArray"].includes(heroString) && !tsvDataRow["radiantWon"]);
+//       console.log(result);
+//       return result;
+//     }
+//     //  Given 2 Heroes, shows stats between the two
+//     // 	Output is: Num Games, Winrate of Hero1 against Hero2, Hero1 independent winrate, Hero2 independent winrate
+//     // This method answers "How is hero1 agaisnt hero2"?
+//     function dataForHeroMatchup(heroString1, heroString2) {
+//       if (!Object.values(HEROES).includes(heroString1)) {
+//         console.log("Invalid hero string: " + heroString1);
+//         return;
+//       }
+//       if (!Object.values(HEROES).includes(heroString2)) {
+//         console.log("Invalid hero string: " + heroString2);
+//         return;
+//       }
+//       num_total_games_together = 0
+//       hero_one_wins_against_hero_two = 0.0
 
-      hero_one_num_picked = 0
-      hero_one_wins = 0.0
+//       hero_one_num_picked = 0
+//       hero_one_wins = 0.0
 
-      hero_two_num_picked = 0
-      hero_two_wins = 0.0
-      // Inside this function, 'data' is one full row of the tsv file.
-      data = d3.tsv("matchData.tsv", function(data) {
-        console.log("reading line of data: ");
-        console.log(data);
-        hero_one_won = didHeroWinMatch(heroString1, data);
-        hero_two_won = didHeroWinMatch(heroString2, data);
-        console.log("testing");
-        console.log(data["radiantTeamArray"]);
-        // Have 
-        radiantTeamArray = convertStringToArray(data["radiantTeamArray"]);
-        direTeamArray = convertStringToArray(data["direTeamArray"]);
+//       hero_two_num_picked = 0
+//       hero_two_wins = 0.0
+//       // Inside this function, 'data' is one full row of the tsv file.
+//       data = d3.tsv("matchData.tsv", function(data) {
+//         console.log("reading line of data: ");
+//         console.log(data);
+//         hero_one_won = didHeroWinMatch(heroString1, data);
+//         hero_two_won = didHeroWinMatch(heroString2, data);
+//         console.log("testing");
+//         console.log(data["radiantTeamArray"]);
+//         // Have 
+//         radiantTeamArray = convertStringToArray(data["radiantTeamArray"]);
+//         direTeamArray = convertStringToArray(data["direTeamArray"]);
 
-        console.log(radiantTeamArray);
-        if (radiantTeamArray.includes(heroString1) || direTeamArray.includes(heroString1)) {
-          hero_one_num_picked += 1;
-        }
-        if (hero_one_won) {
-          hero_one_wins += 1;
-        }
-        if (radiantTeamArray.includes(heroString2) || direTeamArray.includes(heroString2)) {
-          hero_two_num_picked += 1;
-        }
-        if (hero_two_won) {
-          hero_two_wins += 1;
-        }
-        if (!((radiantTeamArray.includes(heroString1) && direTeamArray.includes(heroString2)) || (direTeamArray.includes(heroString1) && radiantTeamArray.includes(heroString2)) )) {
-          return;
-        } else {
-          num_total_games_together += 1;
-          if (hero_one_won) {
-            hero_one_wins_against_hero_two += 1;
-          }
-        }
-        return data;
-      });  
-      console.log(data);
-      if (num_total_games_together > 0) {
-        console.log("Number of Total Games Together: " + str(num_total_games_together));
-        console.log(heroString1.toUpperCase() + " winrate over " + heroString2.toUpperCase() + ": " + (100*hero_one_wins_against_hero_two/num_total_games_together) + "%");
-        console.log(heroString1.toUpperCase() + " winrate independent of  " + heroString2.toUpperCase() + ": " + (100*hero_one_wins/hero_one_num_picked) + "%");
-        console.log(heroString2.toUpperCase() + " winrate independent of  " + heroString1.toUpperCase() + ": " + (100*hero_two_wins/hero_two_num_picked) + "%");
-      } else {
-        console.log("No match data between these two heroes");
-      }
-    }
+//         console.log(radiantTeamArray);
+//         if (radiantTeamArray.includes(heroString1) || direTeamArray.includes(heroString1)) {
+//           hero_one_num_picked += 1;
+//         }
+//         if (hero_one_won) {
+//           hero_one_wins += 1;
+//         }
+//         if (radiantTeamArray.includes(heroString2) || direTeamArray.includes(heroString2)) {
+//           hero_two_num_picked += 1;
+//         }
+//         if (hero_two_won) {
+//           hero_two_wins += 1;
+//         }
+//         if (!((radiantTeamArray.includes(heroString1) && direTeamArray.includes(heroString2)) || (direTeamArray.includes(heroString1) && radiantTeamArray.includes(heroString2)) )) {
+//           return;
+//         } else {
+//           num_total_games_together += 1;
+//           if (hero_one_won) {
+//             hero_one_wins_against_hero_two += 1;
+//           }
+//         }
+//         return data;
+//       });  
+//       console.log(data);
+//       if (num_total_games_together > 0) {
+//         console.log("Number of Total Games Together: " + str(num_total_games_together));
+//         console.log(heroString1.toUpperCase() + " winrate over " + heroString2.toUpperCase() + ": " + (100*hero_one_wins_against_hero_two/num_total_games_together) + "%");
+//         console.log(heroString1.toUpperCase() + " winrate independent of  " + heroString2.toUpperCase() + ": " + (100*hero_one_wins/hero_one_num_picked) + "%");
+//         console.log(heroString2.toUpperCase() + " winrate independent of  " + heroString1.toUpperCase() + ": " + (100*hero_two_wins/hero_two_num_picked) + "%");
+//       } else {
+//         console.log("No match data between these two heroes");
+//       }
+//     }
 
-    // Given Hero, shows which heroes are good against it
-    // Outputs:	Enemy hero, Num Games Against, Winrate Against, Enemy hero's independent winrate		    	
-    function bestHeroesAgainstGivenHero(heroString, numTopHeroes) {
-    	data = builHeroToStatsDictionary(heroString);
-    	newData = convertDict(data);
-      sortedKeys = Object.keys(newData).sort().reverse();
-    	console.log("Best heroes against " + heroString);
-    	console.log("Hero,  Number of Games Against, Winrate Against,  Total Winrate (independent of chosen hero)");
+//     // Given Hero, shows which heroes are good against it
+//     // Outputs:	Enemy hero, Num Games Against, Winrate Against, Enemy hero's independent winrate		    	
+//     function bestHeroesAgainstGivenHero(heroString, numTopHeroes) {
+//     	data = builHeroToStatsDictionary(heroString);
+//     	newData = convertDict(data);
+//       sortedKeys = Object.keys(newData).sort().reverse();
+//     	console.log("Best heroes against " + heroString);
+//     	console.log("Hero,  Number of Games Against, Winrate Against,  Total Winrate (independent of chosen hero)");
 
-    	// Dict is keyed by winrate, and values are arrays of hero along with data. Need to split values of dict
-    	// and find top [numTopHeroes] heroes.
-    	heroCount = 0;
-    	i = 0;
-    	while(True) {
-    		if (newData[sortedKeys[i]] < 0) {
-    			return;
-        }  
-    		for (i=0; i<newData[sortedKeys[i]].lenth; i++) {
-    			if (heroCount >= numTopHeroes) {
-    				return;
-          }
-    			console.log(newData[sortedKeys[i]][i]);
-    			heroCount += 1;
-        }
-        i += 1;
-      }
-    }
+//     	// Dict is keyed by winrate, and values are arrays of hero along with data. Need to split values of dict
+//     	// and find top [numTopHeroes] heroes.
+//     	heroCount = 0;
+//     	i = 0;
+//     	while(True) {
+//     		if (newData[sortedKeys[i]] < 0) {
+//     			return;
+//         }  
+//     		for (i=0; i<newData[sortedKeys[i]].lenth; i++) {
+//     			if (heroCount >= numTopHeroes) {
+//     				return;
+//           }
+//     			console.log(newData[sortedKeys[i]][i]);
+//     			heroCount += 1;
+//         }
+//         i += 1;
+//       }
+//     }
 
-    // Converts from shit to more useful shit
-    function builHeroToStatsDictionary(heroString) {
-    	data = {};
-      line = d3.tsv("matchData.tsv", function(line) {
-    			radiantTeamArray = line[2].split(',');
-    			direTeamArray = line[3].split(',');
+//     // Converts from shit to more useful shit
+//     function builHeroToStatsDictionary(heroString) {
+//     	data = {};
+//       line = d3.tsv("matchData.tsv", function(line) {
+//     			radiantTeamArray = line[2].split(',');
+//     			direTeamArray = line[3].split(',');
 
-    			for (i=0; i<radiantTeamArray.length; i++) {
-    				hero = radiantTeamArray[i].strip().replace("'", "").replace('[', '').replace(']', '');
-    				if (hero == heroString) {
-    					continue;
-            }
-    				isHeroOnEnemyTeam = line[3].includes(heroString);
+//     			for (i=0; i<radiantTeamArray.length; i++) {
+//     				hero = radiantTeamArray[i].strip().replace("'", "").replace('[', '').replace(']', '');
+//     				if (hero == heroString) {
+//     					continue;
+//             }
+//     				isHeroOnEnemyTeam = line[3].includes(heroString);
 
-    				if (Object.keys(data).includes(hero)) {
-    					newData = data[hero];
-    					if (isHeroOnEnemyTeam) {
-    						newData[0] += 1;
-    						if (line[1] == 'True') {
-    							newData[1] += 1;
-                }
-              }
-    					newData[2] += 1;
-    					if (line[1] == 'True') {
-    						newData[3] += 1;
-              }
-            } else { // First time gathering data for this hero
-    					newData = [];
-    					if (isHeroOnEnemyTeam) {
-    						newData.push(1.0);
-    						if (line[1] == 'True') {
-    							newData.append(1.0);
-                } else {
-    							newData.append(0.0);
-                }
-              } else {
-    						newData.append(0.0);
-    						newData.append(0.0);
-              }
-    					newData.append(1.0);
-    					if (line[1] == 'True') {
-    						newData.append(1.0);
-              } else {
-    						newData.append(0.0);
-              }
-    				  data[hero] = newData;
-            }
-            for (i=0; i<direTeamArray.length; i++) {
-              hero = hero.strip().replace("'", "").replace('[', '').replace(']', '');
-              if (hero == heroString) {
-                continue;
-              }
-              isHeroOnEnemyTeam = (line[2].includes(heroString));
+//     				if (Object.keys(data).includes(hero)) {
+//     					newData = data[hero];
+//     					if (isHeroOnEnemyTeam) {
+//     						newData[0] += 1;
+//     						if (line[1] == 'True') {
+//     							newData[1] += 1;
+//                 }
+//               }
+//     					newData[2] += 1;
+//     					if (line[1] == 'True') {
+//     						newData[3] += 1;
+//               }
+//             } else { // First time gathering data for this hero
+//     					newData = [];
+//     					if (isHeroOnEnemyTeam) {
+//     						newData.push(1.0);
+//     						if (line[1] == 'True') {
+//     							newData.append(1.0);
+//                 } else {
+//     							newData.append(0.0);
+//                 }
+//               } else {
+//     						newData.append(0.0);
+//     						newData.append(0.0);
+//               }
+//     					newData.append(1.0);
+//     					if (line[1] == 'True') {
+//     						newData.append(1.0);
+//               } else {
+//     						newData.append(0.0);
+//               }
+//     				  data[hero] = newData;
+//             }
+//             for (i=0; i<direTeamArray.length; i++) {
+//               hero = hero.strip().replace("'", "").replace('[', '').replace(']', '');
+//               if (hero == heroString) {
+//                 continue;
+//               }
+//               isHeroOnEnemyTeam = (line[2].includes(heroString));
 
-              if (Object.keys(data).includes(hero)) {
-                newData = data[hero];
-                if (isHeroOnEnemyTeam) {
-                  newData[0] += 1;
-                  if (line[1] == 'False') {
-                    newData[1] += 1;
-                  }
-                }
-                newData[2] += 1;
-                if (line[1] == 'False') {
-                  newData[3] += 1;
-                }
-              } else { // First time gathering data for this hero
-                newData = [];
-                if (isHeroOnEnemyTeam) {
-                  newData.push(1.0);
-                  if (line[1] == 'True') {
-                    newData.append(1.0);
-                  } else {
-                    newData.append(0.0);
-                  }
-                } else {
-                  newData.append(0.0);
-                  newData.append(0.0);
-                }
-                newData.append(1.0);
-                if (line[1] == 'False') {
-                  newData.append(1.0);
-                } else {
-                  newData.append(0.0);
-                }
-              }
-              data[hero] = newData;
-           }
-        }
-    	  return line;
-      });
-      return data;
-    }
+//               if (Object.keys(data).includes(hero)) {
+//                 newData = data[hero];
+//                 if (isHeroOnEnemyTeam) {
+//                   newData[0] += 1;
+//                   if (line[1] == 'False') {
+//                     newData[1] += 1;
+//                   }
+//                 }
+//                 newData[2] += 1;
+//                 if (line[1] == 'False') {
+//                   newData[3] += 1;
+//                 }
+//               } else { // First time gathering data for this hero
+//                 newData = [];
+//                 if (isHeroOnEnemyTeam) {
+//                   newData.push(1.0);
+//                   if (line[1] == 'True') {
+//                     newData.append(1.0);
+//                   } else {
+//                     newData.append(0.0);
+//                   }
+//                 } else {
+//                   newData.append(0.0);
+//                   newData.append(0.0);
+//                 }
+//                 newData.append(1.0);
+//                 if (line[1] == 'False') {
+//                   newData.append(1.0);
+//                 } else {
+//                   newData.append(0.0);
+//                 }
+//               }
+//               data[hero] = newData;
+//            }
+//         }
+//     	  return line;
+//       });
+//       return data;
+//     }
 
-    function weighFunction(numGamesAgainst, numWinsAgainst) {
-      return Math.log((numGamesAgainst+1)) * (((numWinsAgainst/numGamesAgainst) * 2) - 1);
-    }
+//     function weighFunction(numGamesAgainst, numWinsAgainst) {
+//       return Math.log((numGamesAgainst+1)) * (((numWinsAgainst/numGamesAgainst) * 2) - 1);
+//     }
 
-    function convertDict(data) {
-    	newDict = {}
-      oldKeys = Object.keys(data);
-    	for (i=0; i<oldKeys.length; i++) {
-        key = oldKeys[i];
-    		if (data[key][0] < 1 || data[key][2] < 1) {
-    			continue;
-        }
+//     function convertDict(data) {
+//     	newDict = {}
+//       oldKeys = Object.keys(data);
+//     	for (i=0; i<oldKeys.length; i++) {
+//         key = oldKeys[i];
+//     		if (data[key][0] < 1 || data[key][2] < 1) {
+//     			continue;
+//         }
 
-    		newKey = weighFunction(data[key][0], data[key][1]);
-    		newValue = [];
-    		newValue.push(key);
-    		newValue.push(data[key][0]);
-    		newValue.push(data[key][1]/data[key][0]);
-    		newValue.push(data[key][3]/data[key][2]);
+//     		newKey = weighFunction(data[key][0], data[key][1]);
+//     		newValue = [];
+//     		newValue.push(key);
+//     		newValue.push(data[key][0]);
+//     		newValue.push(data[key][1]/data[key][0]);
+//     		newValue.push(data[key][3]/data[key][2]);
 
-    		if (Object.keys(newDict).includes(newKey)) {
-    			newDict[newKey].push(newValue);
-        } else {
-    			newDict[newKey] = [newValue];
-        }
-      }
-    	return newDict;
-    }
+//     		if (Object.keys(newDict).includes(newKey)) {
+//     			newDict[newKey].push(newValue);
+//         } else {
+//     			newDict[newKey] = [newValue];
+//         }
+//       }
+//     	return newDict;
+//     }
   </script>
   
 </head>
