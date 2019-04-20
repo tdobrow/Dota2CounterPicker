@@ -25,13 +25,7 @@
           url: filename,
           dataType: "text",
           async: false,
-          success: function(csv) {
-              results = []
-              data = d3.tsv("matchData.tsv", function(data) {console.log(data); });
-              results.push(data);
-              console.log(results);
-              return results;
-          }
+          success: function(csv) {arraydata = $.csv.toArrays(csv,{separator:'\t'}); }
         });
     console.log(arraydata);
     return arraydata;
