@@ -26,10 +26,11 @@
           dataType: "text",
           async: false,
           success: function(csv) {
-              console.log(csv);
+              results = []
               data = d3.tsv("matchData.tsv", function(data) {console.log(data); });
-              console.log("reading line of data: ");
-              //arraydata = $.csv.toArrays(csv,{separator:'\t'});
+              results.push(data);
+              console.log(results);
+              return results;
           }
         });
     console.log(arraydata);
