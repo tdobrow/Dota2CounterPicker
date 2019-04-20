@@ -26,8 +26,10 @@
           dataType: "text",
           async: false,
           success: function(csv) {
-            console.log("success");
-            //arraydata = $.csv.toArrays(csv,{separator:'\t'});
+              console.log(csv);
+              data = d3.tsv("matchData.tsv", function(data) {console.log(data); }
+              console.log("reading line of data: ");
+              //arraydata = $.csv.toArrays(csv,{separator:'\t'});
           }
         });
     console.log(arraydata);
