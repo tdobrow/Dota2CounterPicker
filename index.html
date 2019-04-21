@@ -84,7 +84,7 @@
             hero_two_wins += 1;
           }
           if (!((radiantTeamArray.includes(heroString1) && direTeamArray.includes(heroString2)) || (direTeamArray.includes(heroString1) && radiantTeamArray.includes(heroString2)) )) {
-            return;
+            continue;
           } else {
             num_total_games_together += 1;
             if (hero_one_won) {
