@@ -110,8 +110,14 @@
     // Outputs:	Enemy hero, Num Games Against, Winrate Against, Enemy hero's independent winrate		    	
     function bestHeroesAgainstGivenHero(heroString, numTopHeroes) {
     	data = builHeroToStatsDictionary(heroString);
+      console.log("logging data");
+      console.log(data);
     	newData = convertDict(data);
+      console.log("logging new data");
+      console.log(newData);
       sortedKeys = Object.keys(newData).sort().reverse();
+      console.log("logging sorted keys");
+      console.log(sortedKeys);
     	console.log("Best heroes against " + heroString);
     	console.log("Hero,  Number of Games Against, Winrate Against,  Total Winrate (independent of chosen hero)");
 
@@ -123,7 +129,7 @@
     		if (newData[sortedKeys[i]] < 0) {
     			return;
         }  
-    		for (i=0; i<newData[sortedKeys[i]].lenth; i++) {
+    		for (i=0; i<newData[sortedKeys[i]].length; i++) {
     			if (heroCount >= numTopHeroes) {
     				return;
           }
