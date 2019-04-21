@@ -95,7 +95,7 @@
         
         console.log(data);
         if (num_total_games_together > 0) {
-          console.log("Number of Total Games Together: " + str(num_total_games_together));
+          console.log("Number of Total Games Together: " + num_total_games_together);
           console.log(heroString1.toUpperCase() + " winrate over " + heroString2.toUpperCase() + ": " + (100*hero_one_wins_against_hero_two/num_total_games_together) + "%");
           console.log(heroString1.toUpperCase() + " winrate independent of  " + heroString2.toUpperCase() + ": " + (100*hero_one_wins/hero_one_num_picked) + "%");
           console.log(heroString2.toUpperCase() + " winrate independent of  " + heroString1.toUpperCase() + ": " + (100*hero_two_wins/hero_two_num_picked) + "%");
