@@ -30,10 +30,11 @@
 //       console.log("finished");
 //     }
     
-    async function getdatafromfile(filename) {
+    function getdatafromfile(filename) {
         try {
           result1 = await d3.tsv(filename);
           console.log("Result 1 ", result1);
+          console.log(result[1]);
         } catch (e) {
           console.log("Error", e);
         } finally {
