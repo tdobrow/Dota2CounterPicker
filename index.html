@@ -21,13 +21,9 @@
         return e.replace("[", "").replace("]", "").replace(" ", "").replace(/'/g, '');
       }); 
     }
-    function getCounterPick(textBoxValue){
+    function getCounterPick(){
       console.log("hello");
-      console.log(textBoxValue);
-      var contents = fs.readFileSync('matchData.tsv', 'utf8');
-      console.log(contents);
-    
-      //dataForHeroMatchup('ursa', 'razor')
+      dataForHeroMatchup('ursa', 'razor')
     }
     function didHeroWinMatch(heroString, tsvDataRow) {
       console.log("hero string: " + heroString);
@@ -262,6 +258,6 @@
 
 <body>
   <input name="textbox1" id="textbox1" type="text" />
-  <input name="buttonExecute" onclick="getdatafromfile('matchData.tsv')" type="button" value="Execute" />
+  <input name="buttonExecute" onclick="getCounterPick()" type="button" value="Execute" />
 </body>
 </html>
