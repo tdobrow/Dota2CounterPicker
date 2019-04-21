@@ -24,7 +24,7 @@
     function getCounterPick(){
       console.log("hello");
       dataForHeroMatchup('ursa', 'razor');
-      bestHeroesAgainstGivenHero('sven', 3);
+      bestHeroesAgainstGivenHero('ursa', 3);
     }
     function didHeroWinMatch(heroString, tsvDataRow) {
       console.log("hero string: " + heroString);
@@ -145,7 +145,8 @@
       }
     }
 
-    // Converts from shit to more useful shit
+    // Outputs 2D array where each row is a non-"heroString" hero.
+    // Each row has 4 columns: NumGamesAgainst, NumWinsAgainst, NumGamesTotal, NumWinsTotal
     async function builHeroToStatsDictionary(heroString) {
     	data = {};
       try {
@@ -168,7 +169,7 @@
               }
               isHeroOnEnemyTeam = direTeamArray.includes(heroString);
 
-              if (Object.keys(data).includes(hero)) {
+              if (Object.keys(data).includes(hero)) { // already seen this hero
                 newData = data[hero];
                 if (isHeroOnEnemyTeam) {
                   newData[0] += 1;
@@ -180,7 +181,7 @@
                 if (line["radiantWon"] == 'True') {
                   newData[3] += 1;
                 }
-              } else { // First time gathering data for this hero
+              } else { // first time gathering data for this hero
                 newData = [];
                 if (isHeroOnEnemyTeam) {
                   newData.push(1.0);
