@@ -23,7 +23,8 @@
     }
     function getCounterPick(){
       console.log("hello");
-      dataForHeroMatchup('ursa', 'razor')
+      dataForHeroMatchup('ursa', 'razor');
+      bestHeroesAgainstGivenHero('sven', 3);
     }
     function didHeroWinMatch(heroString, tsvDataRow) {
       console.log("hero string: " + heroString);
@@ -105,156 +106,162 @@
       }
     }
 
-//     // Given Hero, shows which heroes are good against it
-//     // Outputs:	Enemy hero, Num Games Against, Winrate Against, Enemy hero's independent winrate		    	
-//     function bestHeroesAgainstGivenHero(heroString, numTopHeroes) {
-//     	data = builHeroToStatsDictionary(heroString);
-//     	newData = convertDict(data);
-//       sortedKeys = Object.keys(newData).sort().reverse();
-//     	console.log("Best heroes against " + heroString);
-//     	console.log("Hero,  Number of Games Against, Winrate Against,  Total Winrate (independent of chosen hero)");
+    // Given Hero, shows which heroes are good against it
+    // Outputs:	Enemy hero, Num Games Against, Winrate Against, Enemy hero's independent winrate		    	
+    function bestHeroesAgainstGivenHero(heroString, numTopHeroes) {
+    	data = builHeroToStatsDictionary(heroString);
+    	newData = convertDict(data);
+      sortedKeys = Object.keys(newData).sort().reverse();
+    	console.log("Best heroes against " + heroString);
+    	console.log("Hero,  Number of Games Against, Winrate Against,  Total Winrate (independent of chosen hero)");
 
-//     	// Dict is keyed by winrate, and values are arrays of hero along with data. Need to split values of dict
-//     	// and find top [numTopHeroes] heroes.
-//     	heroCount = 0;
-//     	i = 0;
-//     	while(True) {
-//     		if (newData[sortedKeys[i]] < 0) {
-//     			return;
-//         }  
-//     		for (i=0; i<newData[sortedKeys[i]].lenth; i++) {
-//     			if (heroCount >= numTopHeroes) {
-//     				return;
-//           }
-//     			console.log(newData[sortedKeys[i]][i]);
-//     			heroCount += 1;
-//         }
-//         i += 1;
-//       }
-//     }
+    	// Dict is keyed by winrate, and values are arrays of hero along with data. Need to split values of dict
+    	// and find top [numTopHeroes] heroes.
+    	heroCount = 0;
+    	i = 0;
+    	while(True) {
+    		if (newData[sortedKeys[i]] < 0) {
+    			return;
+        }  
+    		for (i=0; i<newData[sortedKeys[i]].lenth; i++) {
+    			if (heroCount >= numTopHeroes) {
+    				return;
+          }
+    			console.log(newData[sortedKeys[i]][i]);
+    			heroCount += 1;
+        }
+        i += 1;
+      }
+    }
 
-//     // Converts from shit to more useful shit
-//     function builHeroToStatsDictionary(heroString) {
-//     	data = {};
-//       line = d3.tsv("matchData.tsv", function(line) {
-//     			radiantTeamArray = line[2].split(',');
-//     			direTeamArray = line[3].split(',');
+    // Converts from shit to more useful shit
+    async function builHeroToStatsDictionary(heroString) {
+    	data = {};
+      try {
+        fullData = await d3.tsv("matchData.tsv");
+      } catch (e) {
+        console.log("Error", e);
+      } finally {
+        for (index=0; index<fullData.length; index++) {
+            line = fullData[index];
+          
+            radiantTeamArray = convertStringToArray(line[2]);
+            direTeamArray = convertStringToArray(line[3]);
 
-//     			for (i=0; i<radiantTeamArray.length; i++) {
-//     				hero = radiantTeamArray[i].strip().replace("'", "").replace('[', '').replace(']', '');
-//     				if (hero == heroString) {
-//     					continue;
-//             }
-//     				isHeroOnEnemyTeam = line[3].includes(heroString);
+            for (i=0; i<radiantTeamArray.length; i++) {
+              hero = radiantTeamArray[i];
+              if (hero == heroString) {
+                continue;
+              }
+              isHeroOnEnemyTeam = direTeamArray.includes(heroString);
 
-//     				if (Object.keys(data).includes(hero)) {
-//     					newData = data[hero];
-//     					if (isHeroOnEnemyTeam) {
-//     						newData[0] += 1;
-//     						if (line[1] == 'True') {
-//     							newData[1] += 1;
-//                 }
-//               }
-//     					newData[2] += 1;
-//     					if (line[1] == 'True') {
-//     						newData[3] += 1;
-//               }
-//             } else { // First time gathering data for this hero
-//     					newData = [];
-//     					if (isHeroOnEnemyTeam) {
-//     						newData.push(1.0);
-//     						if (line[1] == 'True') {
-//     							newData.append(1.0);
-//                 } else {
-//     							newData.append(0.0);
-//                 }
-//               } else {
-//     						newData.append(0.0);
-//     						newData.append(0.0);
-//               }
-//     					newData.append(1.0);
-//     					if (line[1] == 'True') {
-//     						newData.append(1.0);
-//               } else {
-//     						newData.append(0.0);
-//               }
-//     				  data[hero] = newData;
-//             }
-//             for (i=0; i<direTeamArray.length; i++) {
-//               hero = hero.strip().replace("'", "").replace('[', '').replace(']', '');
-//               if (hero == heroString) {
-//                 continue;
-//               }
-//               isHeroOnEnemyTeam = (line[2].includes(heroString));
+              if (Object.keys(data).includes(hero)) {
+                newData = data[hero];
+                if (isHeroOnEnemyTeam) {
+                  newData[0] += 1;
+                  if (line[1] == 'True') {
+                    newData[1] += 1;
+                  }
+                }
+                newData[2] += 1;
+                if (line[1] == 'True') {
+                  newData[3] += 1;
+                }
+              } else { // First time gathering data for this hero
+                newData = [];
+                if (isHeroOnEnemyTeam) {
+                  newData.push(1.0);
+                  if (line[1] == 'True') {
+                    newData.append(1.0);
+                  } else {
+                    newData.append(0.0);
+                  }
+                } else {
+                  newData.append(0.0);
+                  newData.append(0.0);
+                }
+                newData.append(1.0);
+                if (line[1] == 'True') {
+                  newData.append(1.0);
+                } else {
+                  newData.append(0.0);
+                }
+                data[hero] = newData;
+              }
+              for (i=0; i<direTeamArray.length; i++) {
+                hero = direTeamArray[i];
+                if (hero == heroString) {
+                  continue;
+                }
+                isHeroOnEnemyTeam = (radiantTeamArray.includes(heroString));
 
-//               if (Object.keys(data).includes(hero)) {
-//                 newData = data[hero];
-//                 if (isHeroOnEnemyTeam) {
-//                   newData[0] += 1;
-//                   if (line[1] == 'False') {
-//                     newData[1] += 1;
-//                   }
-//                 }
-//                 newData[2] += 1;
-//                 if (line[1] == 'False') {
-//                   newData[3] += 1;
-//                 }
-//               } else { // First time gathering data for this hero
-//                 newData = [];
-//                 if (isHeroOnEnemyTeam) {
-//                   newData.push(1.0);
-//                   if (line[1] == 'True') {
-//                     newData.append(1.0);
-//                   } else {
-//                     newData.append(0.0);
-//                   }
-//                 } else {
-//                   newData.append(0.0);
-//                   newData.append(0.0);
-//                 }
-//                 newData.append(1.0);
-//                 if (line[1] == 'False') {
-//                   newData.append(1.0);
-//                 } else {
-//                   newData.append(0.0);
-//                 }
-//               }
-//               data[hero] = newData;
-//            }
-//         }
-//     	  return line;
-//       });
-//       return data;
-//     }
+                if (Object.keys(data).includes(hero)) {
+                  newData = data[hero];
+                  if (isHeroOnEnemyTeam) {
+                    newData[0] += 1;
+                    if (line[1] == 'False') {
+                      newData[1] += 1;
+                    }
+                  }
+                  newData[2] += 1;
+                  if (line[1] == 'False') {
+                    newData[3] += 1;
+                  }
+                } else { // First time gathering data for this hero
+                  newData = [];
+                  if (isHeroOnEnemyTeam) {
+                    newData.push(1.0);
+                    if (line[1] == 'True') {
+                      newData.append(1.0);
+                    } else {
+                      newData.append(0.0);
+                    }
+                  } else {
+                    newData.append(0.0);
+                    newData.append(0.0);
+                  }
+                  newData.append(1.0);
+                  if (line[1] == 'False') {
+                    newData.append(1.0);
+                  } else {
+                    newData.append(0.0);
+                  }
+                }
+                data[hero] = newData;
+             }
+          }
+        });
+      return data;
+    }
 
-//     function weighFunction(numGamesAgainst, numWinsAgainst) {
-//       return Math.log((numGamesAgainst+1)) * (((numWinsAgainst/numGamesAgainst) * 2) - 1);
-//     }
+    function weighFunction(numGamesAgainst, numWinsAgainst) {
+      return Math.log((numGamesAgainst+1)) * (((numWinsAgainst/numGamesAgainst) * 2) - 1);
+    }
 
-//     function convertDict(data) {
-//     	newDict = {}
-//       oldKeys = Object.keys(data);
-//     	for (i=0; i<oldKeys.length; i++) {
-//         key = oldKeys[i];
-//     		if (data[key][0] < 1 || data[key][2] < 1) {
-//     			continue;
-//         }
+    function convertDict(data) {
+    	newDict = {}
+      oldKeys = Object.keys(data);
+    	for (i=0; i<oldKeys.length; i++) {
+        key = oldKeys[i];
+    		if (data[key][0] < 1 || data[key][2] < 1) {
+    			continue;
+        }
 
-//     		newKey = weighFunction(data[key][0], data[key][1]);
-//     		newValue = [];
-//     		newValue.push(key);
-//     		newValue.push(data[key][0]);
-//     		newValue.push(data[key][1]/data[key][0]);
-//     		newValue.push(data[key][3]/data[key][2]);
+    		newKey = weighFunction(data[key][0], data[key][1]);
+    		newValue = [];
+    		newValue.push(key);
+    		newValue.push(data[key][0]);
+    		newValue.push(data[key][1]/data[key][0]);
+    		newValue.push(data[key][3]/data[key][2]);
 
-//     		if (Object.keys(newDict).includes(newKey)) {
-//     			newDict[newKey].push(newValue);
-//         } else {
-//     			newDict[newKey] = [newValue];
-//         }
-//       }
-//     	return newDict;
-//     }
+    		if (Object.keys(newDict).includes(newKey)) {
+    			newDict[newKey].push(newValue);
+        } else {
+    			newDict[newKey] = [newValue];
+        }
+      }
+    	return newDict;
+    }
   </script>
   
 </head>
