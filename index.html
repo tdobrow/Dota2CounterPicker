@@ -108,7 +108,7 @@
 
     // Given Hero, shows which heroes are good against it
     // Outputs:	Enemy hero, Num Games Against, Winrate Against, Enemy hero's independent winrate		    	
-    function bestHeroesAgainstGivenHero(heroString, numTopHeroes) {
+    async function bestHeroesAgainstGivenHero(heroString, numTopHeroes) {
       try {
         data = await builHeroToStatsDictionary(heroString);
       } catch (e) {
