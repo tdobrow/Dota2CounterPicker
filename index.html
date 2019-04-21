@@ -185,19 +185,19 @@
                 if (isHeroOnEnemyTeam) {
                   newData.push(1.0);
                   if (line["radiantWon"] == 'True') {
-                    newData.append(1.0);
+                    newData.push(1.0);
                   } else {
-                    newData.append(0.0);
+                    newData.push(0.0);
                   }
                 } else {
-                  newData.append(0.0);
-                  newData.append(0.0);
+                  newData.push(0.0);
+                  newData.push(0.0);
                 }
-                newData.append(1.0);
+                newData.push(1.0);
                 if (line["radiantWon"] == 'True') {
-                  newData.append(1.0);
+                  newData.push(1.0);
                 } else {
-                  newData.append(0.0);
+                  newData.push(0.0);
                 }
                 data[hero] = newData;
               }
@@ -225,19 +225,19 @@
                   if (isHeroOnEnemyTeam) {
                     newData.push(1.0);
                     if (line["radiantWon"] == 'True') {
-                      newData.append(1.0);
+                      newData.push(1.0);
                     } else {
-                      newData.append(0.0);
+                      newData.push(0.0);
                     }
                   } else {
-                    newData.append(0.0);
-                    newData.append(0.0);
+                    newData.push(0.0);
+                    newData.push(0.0);
                   }
-                  newData.append(1.0);
+                  newData.push(1.0);
                   if (line["radiantWon"] == 'False') {
-                    newData.append(1.0);
+                    newData.push(1.0);
                   } else {
-                    newData.append(0.0);
+                    newData.push(0.0);
                   }
                 }
                 data[hero] = newData;
