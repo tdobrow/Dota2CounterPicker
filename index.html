@@ -53,40 +53,43 @@
       hero_two_wins = 0.0
       
       try {
-        data = await d3.tsv("matchData.tsv");
+        fullData = await d3.tsv("matchData.tsv");
       } catch (e) {
         console.log("Error", e);
       } finally {
         
         console.log("reading data: ");
-        console.log(data);
-        hero_one_won = didHeroWinMatch(heroString1, data);
-        hero_two_won = didHeroWinMatch(heroString2, data);
-        console.log("testing");
-        console.log(data["radiantTeamArray"]);
+        console.log(fullData);
+        for (int index=0; index<fulLData.length; index++) {
+          data = fullData[index];
+          hero_one_won = didHeroWinMatch(heroString1, data);
+          hero_two_won = didHeroWinMatch(heroString2, data);
+          console.log("testing");
+          console.log(data["radiantTeamArray"]);
 
-        radiantTeamArray = convertStringToArray(data["radiantTeamArray"]);
-        direTeamArray = convertStringToArray(data["direTeamArray"]);
+          radiantTeamArray = convertStringToArray(data["radiantTeamArray"]);
+          direTeamArray = convertStringToArray(data["direTeamArray"]);
 
-        console.log(radiantTeamArray);
-        if (radiantTeamArray.includes(heroString1) || direTeamArray.includes(heroString1)) {
-          hero_one_num_picked += 1;
-        }
-        if (hero_one_won) {
-          hero_one_wins += 1;
-        }
-        if (radiantTeamArray.includes(heroString2) || direTeamArray.includes(heroString2)) {
-          hero_two_num_picked += 1;
-        }
-        if (hero_two_won) {
-          hero_two_wins += 1;
-        }
-        if (!((radiantTeamArray.includes(heroString1) && direTeamArray.includes(heroString2)) || (direTeamArray.includes(heroString1) && radiantTeamArray.includes(heroString2)) )) {
-          return;
-        } else {
-          num_total_games_together += 1;
+          console.log(radiantTeamArray);
+          if (radiantTeamArray.includes(heroString1) || direTeamArray.includes(heroString1)) {
+            hero_one_num_picked += 1;
+          }
           if (hero_one_won) {
-            hero_one_wins_against_hero_two += 1;
+            hero_one_wins += 1;
+          }
+          if (radiantTeamArray.includes(heroString2) || direTeamArray.includes(heroString2)) {
+            hero_two_num_picked += 1;
+          }
+          if (hero_two_won) {
+            hero_two_wins += 1;
+          }
+          if (!((radiantTeamArray.includes(heroString1) && direTeamArray.includes(heroString2)) || (direTeamArray.includes(heroString1) && radiantTeamArray.includes(heroString2)) )) {
+            return;
+          } else {
+            num_total_games_together += 1;
+            if (hero_one_won) {
+              hero_one_wins_against_hero_two += 1;
+            }
           }
         }
         
