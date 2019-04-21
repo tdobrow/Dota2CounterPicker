@@ -20,10 +20,10 @@
       // Read annotation file. Example : %timeinstant \t %value \n
       // Return an array of string
       console.log(filename);
-      promiseOfData = d3.tsv(filename).then(function(data) {
+      promiseOfData = await d3.tsv(filename).then(function(data) {
+        await console.log(data);
         return data;
       });
-      let result = await Promise.resolve(promiseOfData);
       console.log(result);
       console.log("finished");
     }
