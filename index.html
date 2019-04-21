@@ -153,11 +153,13 @@
       } catch (e) {
         console.log("Error", e);
       } finally {
+        console.log("big log of data");
+        console.log(fullData);
         for (index=0; index<fullData.length; index++) {
             line = fullData[index];
           
-            radiantTeamArray = convertStringToArray(line[2]);
-            direTeamArray = convertStringToArray(line[3]);
+            radiantTeamArray = convertStringToArray(line["radiantTeamArray"]);
+            direTeamArray = convertStringToArray(line["direTeamArray"]);
 
             for (i=0; i<radiantTeamArray.length; i++) {
               hero = radiantTeamArray[i];
@@ -170,19 +172,19 @@
                 newData = data[hero];
                 if (isHeroOnEnemyTeam) {
                   newData[0] += 1;
-                  if (line[1] == 'True') {
+                  if (line["radiantWon"] == 'True') {
                     newData[1] += 1;
                   }
                 }
                 newData[2] += 1;
-                if (line[1] == 'True') {
+                if (line["radiantWon"] == 'True') {
                   newData[3] += 1;
                 }
               } else { // First time gathering data for this hero
                 newData = [];
                 if (isHeroOnEnemyTeam) {
                   newData.push(1.0);
-                  if (line[1] == 'True') {
+                  if (line["radiantWon"] == 'True') {
                     newData.append(1.0);
                   } else {
                     newData.append(0.0);
@@ -192,7 +194,7 @@
                   newData.append(0.0);
                 }
                 newData.append(1.0);
-                if (line[1] == 'True') {
+                if (line["radiantWon"] == 'True') {
                   newData.append(1.0);
                 } else {
                   newData.append(0.0);
@@ -210,19 +212,19 @@
                   newData = data[hero];
                   if (isHeroOnEnemyTeam) {
                     newData[0] += 1;
-                    if (line[1] == 'False') {
+                    if (line["radiantWon"] == 'False') {
                       newData[1] += 1;
                     }
                   }
                   newData[2] += 1;
-                  if (line[1] == 'False') {
+                  if (line["radiantWon"] == 'False') {
                     newData[3] += 1;
                   }
                 } else { // First time gathering data for this hero
                   newData = [];
                   if (isHeroOnEnemyTeam) {
                     newData.push(1.0);
-                    if (line[1] == 'True') {
+                    if (line["radiantWon"] == 'True') {
                       newData.append(1.0);
                     } else {
                       newData.append(0.0);
@@ -232,7 +234,7 @@
                     newData.append(0.0);
                   }
                   newData.append(1.0);
-                  if (line[1] == 'False') {
+                  if (line["radiantWon"] == 'False') {
                     newData.append(1.0);
                   } else {
                     newData.append(0.0);
