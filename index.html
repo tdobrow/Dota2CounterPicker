@@ -109,34 +109,39 @@
     // Given Hero, shows which heroes are good against it
     // Outputs:	Enemy hero, Num Games Against, Winrate Against, Enemy hero's independent winrate		    	
     function bestHeroesAgainstGivenHero(heroString, numTopHeroes) {
-    	data = builHeroToStatsDictionary(heroString);
-      console.log("logging data");
-      console.log(data);
-    	newData = convertDict(data);
-      console.log("logging new data");
-      console.log(newData);
-      sortedKeys = Object.keys(newData).sort().reverse();
-      console.log("logging sorted keys");
-      console.log(sortedKeys);
-    	console.log("Best heroes against " + heroString);
-    	console.log("Hero,  Number of Games Against, Winrate Against,  Total Winrate (independent of chosen hero)");
+      try {
+        data = await builHeroToStatsDictionary(heroString);
+      } catch (e) {
+        console.log("Error", e);
+      } finally {
+        console.log("logging data");
+        console.log(data);
+        newData = convertDict(data);
+        console.log("logging new data");
+        console.log(newData);
+        sortedKeys = Object.keys(newData).sort().reverse();
+        console.log("logging sorted keys");
+        console.log(sortedKeys);
+        console.log("Best heroes against " + heroString);
+        console.log("Hero,  Number of Games Against, Winrate Against,  Total Winrate (independent of chosen hero)");
 
-    	// Dict is keyed by winrate, and values are arrays of hero along with data. Need to split values of dict
-    	// and find top [numTopHeroes] heroes.
-    	heroCount = 0;
-    	i = 0;
-    	while(true) {
-    		if (newData[sortedKeys[i]] < 0) {
-    			return;
-        }  
-    		for (i=0; i<newData[sortedKeys[i]].length; i++) {
-    			if (heroCount >= numTopHeroes) {
-    				return;
+        // Dict is keyed by winrate, and values are arrays of hero along with data. Need to split values of dict
+        // and find top [numTopHeroes] heroes.
+        heroCount = 0;
+        i = 0;
+        while(true) {
+          if (newData[sortedKeys[i]] < 0) {
+            return;
+          }  
+          for (i=0; i<newData[sortedKeys[i]].length; i++) {
+            if (heroCount >= numTopHeroes) {
+              return;
+            }
+            console.log(newData[sortedKeys[i]][i]);
+            heroCount += 1;
           }
-    			console.log(newData[sortedKeys[i]][i]);
-    			heroCount += 1;
+          i += 1;
         }
-        i += 1;
       }
     }
 
