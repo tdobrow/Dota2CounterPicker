@@ -23,7 +23,7 @@
     }
     function getCounterPick(){
       console.log("hello");
-      dataForHeroMatchup('ursa', 'razor');
+      //dataForHeroMatchup('ursa', 'razor');
       bestHeroesAgainstGivenHero('ursa', 3);
     }
     function didHeroWinMatch(heroString, tsvDataRow) {
@@ -116,7 +116,7 @@
       } finally {
         console.log("logging data");
         console.log(dataOfHeroes);
-        var newData = convertDict(newData);
+        var newData = convertDict(dataOfHeroes);
         console.log("logging new data");
         console.log(newData);
         var sortedKeys = Object.keys(newData).sort().reverse();
