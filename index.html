@@ -54,7 +54,7 @@
       hero_two_wins = 0.0
       
       try {
-        fullData = await d3.tsv("matchData.tsv");
+        var fullData = await d3.tsv("matchData.tsv");
       } catch (e) {
         console.log("Error", e);
       } finally {
@@ -62,7 +62,7 @@
         console.log("reading data: ");
         console.log(fullData);
         for (index=0; index<fullData.length; index++) {
-          data = fullData[index];
+          var data = fullData[index];
           hero_one_won = didHeroWinMatch(heroString1, data);
           hero_two_won = didHeroWinMatch(heroString2, data);
           console.log("testing");
@@ -110,16 +110,16 @@
     // Outputs:	Enemy hero, Num Games Against, Winrate Against, Enemy hero's independent winrate		    	
     async function bestHeroesAgainstGivenHero(heroString, numTopHeroes) {
       try {
-        data = await builHeroToStatsDictionary(heroString);
+        var dataOfHeroes = await builHeroToStatsDictionary(heroString);
       } catch (e) {
         console.log("Error", e);
       } finally {
         console.log("logging data");
-        console.log(data);
-        newData = convertDict(data);
+        console.log(dataOfHeroes);
+        var newData = convertDict(data);
         console.log("logging new data");
         console.log(newData);
-        sortedKeys = Object.keys(newData).sort().reverse();
+        var sortedKeys = Object.keys(newData).sort().reverse();
         console.log("logging sorted keys");
         console.log(sortedKeys);
         console.log("Best heroes against " + heroString);
@@ -148,9 +148,9 @@
     // Outputs 2D array where each row is a non-"heroString" hero.
     // Each row has 4 columns: NumGamesAgainst, NumWinsAgainst, NumGamesTotal, NumWinsTotal
     async function builHeroToStatsDictionary(heroString) {
-    	data = {};
+    	var data = {};
       try {
-        fullData = await d3.tsv("matchData.tsv");
+        var fullData = await d3.tsv("matchData.tsv");
       } catch (e) {
         console.log("Error", e);
       } finally {
