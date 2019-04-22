@@ -1,3 +1,4 @@
 matchId	radiantWon	radiantTeamArray	direTeamArray
 4433946363	True	['kunkka', 'jakiro', 'lion', 'warlock', 'ursa']	['chaos_knight', 'grimstroke', 'bane', 'centaur', 'razor']
-4542909749	False	['bounty_hunter', 'oracle', 'viper', 'chaos_knight', 'invoker']	['crystal_maiden', 'ursa', 'rubick', 'nevermore', 'phantom_lancer']
+4542909749	False	['bounty_hunter', 'oracle', 'viper', 'chaos_knight', 'warlock']	['crystal_maiden', 'ursa', 'rubick', 'nevermore', 'phantom_lancer']
+4542909111	True	['bounty_hunter', 'oracle', 'warlock', 'chaos_knight', 'invoker']	['crystal_maiden', 'ursa', 'rubick', 'kunkka', 'phantom_lancer']
