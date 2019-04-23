@@ -274,7 +274,7 @@
     		newValue.push(data[key][1]/data[key][0]);
     		newValue.push(data[key][3]/data[key][2]);
         console.log('newValue');
-        console.log('newValue');
+        console.log(newValue);
 
     		if (Object.keys(newDict).includes(newKey)) {
           console.log('is included');
@@ -285,6 +285,7 @@
     			newDict[newKey] = newBlankArray;
           console.log('not included');
           console.log(newBlankArray);
+          console.log(newDict);
         }
       }
     	return newDict;
