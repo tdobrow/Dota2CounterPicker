@@ -258,6 +258,9 @@
       oldKeys = Object.keys(data);
     	for (i=0; i<oldKeys.length; i++) {
         var key = oldKeys[i];
+        console.log("key");
+        console.log(key);
+        console.log(data[key]);
     		if (data[key][0] < 1 || data[key][2] < 1) {
     			continue;
         }
