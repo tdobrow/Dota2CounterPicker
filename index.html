@@ -23,7 +23,7 @@
     }
     function getCounterPick(textBoxValue){
       //dataForHeroMatchup('ursa', 'razor');
-      bestHeroesAgainstGivenHero(textBoxValue, 100);
+      bestHeroesAgainstGivenHero(textBoxValue, 10);
     }
     function didHeroWinMatch(heroString, tsvDataRow) {
       result = (tsvDataRow["radiantTeamArray"].includes(heroString) && tsvDataRow["radiantWon"]) || (tsvDataRow["direTeamArray"].includes(heroString) && !tsvDataRow["radiantWon"]);
