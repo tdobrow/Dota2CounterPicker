@@ -24,7 +24,7 @@
     function getCounterPick(){
       console.log("hello");
       //dataForHeroMatchup('ursa', 'razor');
-      bestHeroesAgainstGivenHero('ursa', 3);
+      bestHeroesAgainstGivenHero('ursa', 100);
     }
     function didHeroWinMatch(heroString, tsvDataRow) {
       console.log("hero string: " + heroString);
@@ -148,7 +148,7 @@
     // Outputs 2D array where each row is a non-"heroString" hero.
     // Each row has 4 columns: NumGamesAgainst, NumWinsAgainst, NumGamesTotal, NumWinsTotal
     async function builHeroToStatsDictionary(heroString) {
-    	var data = {};
+      var data = {};
       try {
         var fullData = await d3.tsv("matchData.tsv");
       } catch (e) {
@@ -157,92 +157,93 @@
         console.log("big log of data");
         console.log(fullData);
         for (index=0; index<fullData.length; index++) {
-            line = fullData[index];
-          
-            radiantTeamArray = convertStringToArray(line["radiantTeamArray"]);
-            direTeamArray = convertStringToArray(line["direTeamArray"]);
+          line = fullData[index];
+        
+          radiantTeamArray = convertStringToArray(line["radiantTeamArray"]);
+          direTeamArray = convertStringToArray(line["direTeamArray"]);
 
-            for (i=0; i<radiantTeamArray.length; i++) {
-              hero = radiantTeamArray[i];
-              if (hero == heroString) {
-                continue;
-              }
-              isHeroOnEnemyTeam = direTeamArray.includes(heroString);
+          for (i=0; i<radiantTeamArray.length; i++) {
+            hero = radiantTeamArray[i];
+            if (hero == heroString) {
+              continue;
+            }
+            isHeroOnEnemyTeam = direTeamArray.includes(heroString);
 
-              if (Object.keys(data).includes(hero)) { // already seen this hero
-                newData = data[hero];
-                if (isHeroOnEnemyTeam) {
-                  newData[0] += 1;
-                  if (line["radiantWon"] == 'True') {
-                    newData[1] += 1;
-                  }
-                }
-                newData[2] += 1;
+            if (Object.keys(data).includes(hero)) { // already seen this hero
+              newData = data[hero];
+              if (isHeroOnEnemyTeam) {
+                newData[0] += 1;
                 if (line["radiantWon"] == 'True') {
-                  newData[3] += 1;
+                  newData[1] += 1;
                 }
-              } else { // first time gathering data for this hero
-                newData = [];
-                if (isHeroOnEnemyTeam) {
-                  newData.push(1.0);
-                  if (line["radiantWon"] == 'True') {
-                    newData.push(1.0);
-                  } else {
-                    newData.push(0.0);
-                  }
-                } else {
-                  newData.push(0.0);
-                  newData.push(0.0);
-                }
+              }
+              newData[2] += 1;
+              if (line["radiantWon"] == 'True') {
+                newData[3] += 1;
+              }
+            } else { // first time gathering data for this hero
+              newData = [];
+              if (isHeroOnEnemyTeam) {
                 newData.push(1.0);
                 if (line["radiantWon"] == 'True') {
                   newData.push(1.0);
                 } else {
                   newData.push(0.0);
                 }
-                data[hero] = newData;
+              } else {
+                newData.push(0.0);
+                newData.push(0.0);
               }
-              for (i=0; i<direTeamArray.length; i++) {
-                hero = direTeamArray[i];
-                if (hero == heroString) {
-                  continue;
-                }
-                isHeroOnEnemyTeam = (radiantTeamArray.includes(heroString));
+              newData.push(1.0);
+              if (line["radiantWon"] == 'True') {
+                newData.push(1.0);
+              } else {
+                newData.push(0.0);
+              }
+              data[hero] = newData;
+            }
+          }
+          
+          for (i=0; i<direTeamArray.length; i++) {
+            hero = direTeamArray[i];
+            if (hero == heroString) {
+              continue;
+            }
+            isHeroOnEnemyTeam = (radiantTeamArray.includes(heroString));
 
-                if (Object.keys(data).includes(hero)) {
-                  newData = data[hero];
-                  if (isHeroOnEnemyTeam) {
-                    newData[0] += 1;
-                    if (line["radiantWon"] == 'False') {
-                      newData[1] += 1;
-                    }
-                  }
-                  newData[2] += 1;
-                  if (line["radiantWon"] == 'False') {
-                    newData[3] += 1;
-                  }
-                } else { // First time gathering data for this hero
-                  newData = [];
-                  if (isHeroOnEnemyTeam) {
-                    newData.push(1.0);
-                    if (line["radiantWon"] == 'True') {
-                      newData.push(1.0);
-                    } else {
-                      newData.push(0.0);
-                    }
-                  } else {
-                    newData.push(0.0);
-                    newData.push(0.0);
-                  }
-                  newData.push(1.0);
-                  if (line["radiantWon"] == 'False') {
-                    newData.push(1.0);
-                  } else {
-                    newData.push(0.0);
-                  }
+            if (Object.keys(data).includes(hero)) {
+              newData = data[hero];
+              if (isHeroOnEnemyTeam) {
+                newData[0] += 1;
+                if (line["radiantWon"] == 'False') {
+                  newData[1] += 1;
                 }
-                data[hero] = newData;
-             }
+              }
+              newData[2] += 1;
+              if (line["radiantWon"] == 'False') {
+                newData[3] += 1;
+              }
+            } else { // First time gathering data for this hero
+              newData = [];
+              if (isHeroOnEnemyTeam) {
+                newData.push(1.0);
+                if (line["radiantWon"] == 'True') {
+                  newData.push(1.0);
+                } else {
+                  newData.push(0.0);
+                }
+              } else {
+                newData.push(0.0);
+                newData.push(0.0);
+              }
+              newData.push(1.0);
+              if (line["radiantWon"] == 'False') {
+                newData.push(1.0);
+              } else {
+                newData.push(0.0);
+              }
+            }
+            data[hero] = newData;
           }
         }
       }
