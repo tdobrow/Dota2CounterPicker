@@ -21,15 +21,12 @@
         return e.replace("[", "").replace("]", "").replace(" ", "").replace(/'/g, '');
       }); 
     }
-    function getCounterPick(){
-      console.log("hello");
+    function getCounterPick(textBoxValue){
       //dataForHeroMatchup('ursa', 'razor');
-      bestHeroesAgainstGivenHero('ursa', 100);
+      bestHeroesAgainstGivenHero(textBoxValue, 100);
     }
     function didHeroWinMatch(heroString, tsvDataRow) {
-      console.log("hero string: " + heroString);
       result = (tsvDataRow["radiantTeamArray"].includes(heroString) && tsvDataRow["radiantWon"]) || (tsvDataRow["direTeamArray"].includes(heroString) && !tsvDataRow["radiantWon"]);
-      console.log(result);
       return result;
     }
     //  Given 2 Heroes, shows stats between the two
@@ -58,7 +55,6 @@
       } catch (e) {
         console.log("Error", e);
       } finally {
-        
         console.log("reading data: ");
         console.log(fullData);
         for (index=0; index<fullData.length; index++) {
@@ -309,6 +305,6 @@
 
 <body>
   <input name="textbox1" id="textbox1" type="text" />
-  <input name="buttonExecute" onclick="getCounterPick()" type="button" value="Execute" />
+  <input name="buttonExecute" onclick="getCounterPick(document.getElementById('textbox1').value)" type="button" value="Execute" />
 </body>
 </html>
