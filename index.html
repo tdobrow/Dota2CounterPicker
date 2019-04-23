@@ -281,7 +281,7 @@
         console.log(newKey);
         console.log(Object.keys(newDict));
 
-    		if (Object.keys(newDict).includes(newKey)) {
+    		if (Object.keys(newDict).includes(newKey.toString())) {
           console.log('is included');
     			newDict[newKey].push(newValue);
         } else {
