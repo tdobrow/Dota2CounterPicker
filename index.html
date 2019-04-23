@@ -29,6 +29,21 @@
       result = (tsvDataRow["radiantTeamArray"].includes(heroString) && tsvDataRow["radiantWon"]) || (tsvDataRow["direTeamArray"].includes(heroString) && !tsvDataRow["radiantWon"]);
       return result;
     }
+    
+    function makeTable(array) {
+      var table = document.createElement('table');
+      for (var i = 0; i < array.length; i++) {
+          var row = document.createElement('tr');
+          for (var j = 0; j < array[i].length; j++) {
+              var cell = document.createElement('td');
+              cell.textContent = array[i][j];
+              row.appendChild(cell);
+          }
+          table.appendChild(row);
+      }
+      return table;
+  }
+    
     //  Given 2 Heroes, shows stats between the two
     // 	Output is: Num Games, Winrate of Hero1 against Hero2, Hero1 independent winrate, Hero2 independent winrate
     // This method answers "How is hero1 agaisnt hero2"?
@@ -55,19 +70,19 @@
       } catch (e) {
         console.log("Error", e);
       } finally {
-        console.log("reading data: ");
-        console.log(fullData);
+        //console.log("reading data: ");
+        //console.log(fullData);
         for (index=0; index<fullData.length; index++) {
           var data = fullData[index];
           hero_one_won = didHeroWinMatch(heroString1, data);
           hero_two_won = didHeroWinMatch(heroString2, data);
-          console.log("testing");
-          console.log(data["radiantTeamArray"]);
+          //console.log("testing");
+          //console.log(data["radiantTeamArray"]);
 
           radiantTeamArray = convertStringToArray(data["radiantTeamArray"]);
           direTeamArray = convertStringToArray(data["direTeamArray"]);
 
-          console.log(radiantTeamArray);
+          //console.log(radiantTeamArray);
           if (radiantTeamArray.includes(heroString1) || direTeamArray.includes(heroString1)) {
             hero_one_num_picked += 1;
           }
@@ -110,11 +125,11 @@
       } catch (e) {
         console.log("Error", e);
       } finally {
-        console.log("logging data");
-        console.log(dataOfHeroes);
+        //console.log("logging data");
+        //console.log(dataOfHeroes);
         var newData = convertDict(dataOfHeroes);
-        console.log("logging new data");
-        console.log(newData);
+        //console.log("logging new data");
+        //console.log(newData);
         var sortedKeys = Object.keys(newData).sort(
           function(a,b) {
             if (parseInt(a) > parseInt(b)) {
@@ -123,8 +138,8 @@
               return -1; 
             }
           }).reverse();;
-        console.log("logging sorted keys");
-        console.log(sortedKeys);
+        //console.log("logging sorted keys");
+        //console.log(sortedKeys);
         console.log("Best heroes against " + heroString);
         console.log("Hero,  Number of Games Against, Winrate Against,  Total Winrate (independent of chosen hero)");
 
@@ -262,39 +277,23 @@
       oldKeys = Object.keys(data);
     	for (i=0; i<oldKeys.length; i++) {
         var key = oldKeys[i];
-        console.log("key");
-        console.log(key);
-        console.log(data[key]);
-    		if (data[key][0] < 1 || data[key][2] < 1) {
+        if (data[key][0] < 1 || data[key][2] < 1) {
     			continue;
         }
 
     		newKey = Math.round(weighFunction(data[key][0], data[key][1])*100000);
-        console.log("newKey");
-        console.log(newKey);
-    		newValue = [];
+        newValue = [];
     		newValue.push(key);
     		newValue.push(data[key][0]);
     		newValue.push(data[key][1]/data[key][0]);
     		newValue.push(data[key][3]/data[key][2]);
-        console.log('newValue');
-        console.log(newValue);
         
-        console.log('checking now');
-        console.log(newDict);
-        console.log(newKey);
-        console.log(Object.keys(newDict));
-
     		if (Object.keys(newDict).includes(newKey.toString())) {
-          console.log('is included');
-    			newDict[newKey].push(newValue);
+        	newDict[newKey].push(newValue);
         } else {
           newBlankArray = [];
           newBlankArray.push(newValue);
     			newDict[newKey] = newBlankArray;
-          console.log('not included');
-          console.log(newBlankArray);
-          console.log(newDict);
         }
       }
     	return newDict;
