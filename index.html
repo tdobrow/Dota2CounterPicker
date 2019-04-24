@@ -147,6 +147,9 @@
         // and find top [numTopHeroes] heroes.
         heroCount = 0;
         j = 0;
+        tableData = [];
+        topRow = new Array("Hero", "Number of Games Against", "Winrate Against",  "Total Winrate (independent of chosen hero)");
+        tableData.push(topRow);
         while(true) {
           if (sortedKeys[j] < 0) {
             return;
@@ -156,12 +159,16 @@
               return;
             }
             console.log(newData[sortedKeys[j]][i]);
+            tableData.push(newData[sortedKeys[j]][i]);
             heroCount += 1;
           }
           j += 1;
         }
-        var testData = [['hi', 'ho'], ['derp', 'merp']];
-        var newTable = makeTable(testData);
+        console.log('table data');
+        console.log(tableData);
+        var newTable = makeTable(tableData);
+        console.log("new table");
+        console.log(newTable);
         document.getElementById("content").appendChild(newTable);
       }
     }
