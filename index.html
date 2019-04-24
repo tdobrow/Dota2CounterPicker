@@ -23,6 +23,7 @@
     }
     function getCounterPick(textBoxValue){
       //dataForHeroMatchup('ursa', 'razor');
+      
       var dataForTable = bestHeroesAgainstGivenHero(textBoxValue, 10);
       console.log('table data');
       console.log(dataForTable);
@@ -153,9 +154,11 @@
         // and find top [numTopHeroes] heroes.
         heroCount = 0;
         j = 0;
-        tableData = [];
-        topRow = new Array("Hero", "Number of Games Against", "Winrate Against",  "Total Winrate (independent of chosen hero)");
+        var tableData = [];
+        var topRow = new Array("Hero", "Number of Games Against", "Winrate Against",  "Total Winrate (independent of chosen hero)");
         tableData.push(topRow);
+        console.log('table stuff');
+        console.log(tableData);
         while(true) {
           if (sortedKeys[j] < 0) {
             return tableData;
