@@ -32,4 +32,20 @@
   header, footer, article, nav {
     padding: 1em;
   }
+  table {
+    width: 70%;
+  }
+  td {
+    vertical-align: bottom;
+  }
+  tr {
+    text-align: left;
+  }
+  table, tr, td {
+    border: 1px solid black;
+  }
+  #tableHeader {
+  text-align: center;
+  height: 50px;
+ }
 </style>
