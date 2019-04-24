@@ -48,10 +48,24 @@
       return result;
     }
     
+    <tr id='tableHeader'>
+            <td>
+              Top 1
+            </td>
+            <td>
+              Top 2
+            </td>
+          </tr>
+    
+    
     function makeTable(array) {
       var table = document.createElement('table');
+      
       for (var i = 0; i < array.length; i++) {
           var row = document.createElement('tr');
+          if (i==0) {
+            row.setAttribute("id", "tableHeader");
+          }
           for (var j = 0; j < array[i].length; j++) {
               var cell = document.createElement('td');
               cell.textContent = array[i][j];
