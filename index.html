@@ -26,7 +26,7 @@
       //dataForHeroMatchup('ursa', 'razor');
       
       try {
-        var dataForTable = bestHeroesAgainstGivenHero(textBoxValue, 10);
+        var dataForTable = await bestHeroesAgainstGivenHero(textBoxValue, 10);
       } catch (e) {
         console.log("Error", e);
       } finally {
