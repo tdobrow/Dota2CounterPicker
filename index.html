@@ -23,7 +23,13 @@
     }
     function getCounterPick(textBoxValue){
       //dataForHeroMatchup('ursa', 'razor');
-      bestHeroesAgainstGivenHero(textBoxValue, 10);
+      var dataForTable = bestHeroesAgainstGivenHero(textBoxValue, 10);
+      console.log('table data');
+      console.log(dataForTable);
+      var newTable = makeTable(dataForTable);
+      console.log("new table");
+      console.log(newTable);
+      document.getElementById("content").appendChild(newTable);
     }
     function didHeroWinMatch(heroString, tsvDataRow) {
       result = (tsvDataRow["radiantTeamArray"].includes(heroString) && tsvDataRow["radiantWon"]) || (tsvDataRow["direTeamArray"].includes(heroString) && !tsvDataRow["radiantWon"]);
@@ -152,24 +158,18 @@
         tableData.push(topRow);
         while(true) {
           if (sortedKeys[j] < 0) {
-            return;
+            return tableData;
           }  
           for (i=0; i<newData[sortedKeys[j]].length; i++) {
             if (heroCount >= numTopHeroes) {
-              return;
+              return tableData;
             }
             console.log(newData[sortedKeys[j]][i]);
             tableData.push(newData[sortedKeys[j]][i]);
             heroCount += 1;
           }
           j += 1;
-        }
-        console.log('table data');
-        console.log(tableData);
-        var newTable = makeTable(tableData);
-        console.log("new table");
-        console.log(newTable);
-        document.getElementById("content").appendChild(newTable);
+        }        
       }
     }
 
