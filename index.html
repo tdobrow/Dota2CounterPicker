@@ -32,6 +32,10 @@
       } finally {
         console.log('table data');
         console.log(dataForTable);
+        var content = document.getElementById("content");
+        if (content.childNodes.length > 4) {
+          content.removeChild(content.childNodes[4])
+        }
         var newTable = makeTable(dataForTable);
         console.log("new table");
         console.log(newTable);
