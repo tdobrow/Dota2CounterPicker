@@ -21,17 +21,24 @@
         return e.replace("[", "").replace("]", "").replace(" ", "").replace(/'/g, '');
       }); 
     }
-    function getCounterPick(textBoxValue){
+    
+    async function getCounterPick(textBoxValue){
       //dataForHeroMatchup('ursa', 'razor');
       
-      var dataForTable = bestHeroesAgainstGivenHero(textBoxValue, 10);
-      console.log('table data');
-      console.log(dataForTable);
-      var newTable = makeTable(dataForTable);
-      console.log("new table");
-      console.log(newTable);
-      document.getElementById("content").appendChild(newTable);
+      try {
+        var dataForTable = bestHeroesAgainstGivenHero(textBoxValue, 10);
+      } catch (e) {
+        console.log("Error", e);
+      } finally {
+        console.log('table data');
+        console.log(dataForTable);
+        var newTable = makeTable(dataForTable);
+        console.log("new table");
+        console.log(newTable);
+        document.getElementById("content").appendChild(newTable);
+      }
     }
+    
     function didHeroWinMatch(heroString, tsvDataRow) {
       result = (tsvDataRow["radiantTeamArray"].includes(heroString) && tsvDataRow["radiantWon"]) || (tsvDataRow["direTeamArray"].includes(heroString) && !tsvDataRow["radiantWon"]);
       return result;
@@ -185,8 +192,6 @@
       } catch (e) {
         console.log("Error", e);
       } finally {
-        console.log("big log of data");
-        console.log(fullData);
         for (index=0; index<fullData.length; index++) {
           line = fullData[index];
         
