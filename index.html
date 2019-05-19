@@ -32,9 +32,9 @@
       } finally {
         console.log('table data');
         console.log(dataForTable);
-        var content = document.getElementById("content");
-        if (content.childNodes.length > 4) {
-          content.removeChild(content.childNodes[4])
+        var content = document.getElementById("tableHolder");
+        if (content.childNodes.length > 2) {
+          content.removeChild(content.childNodes[2])
         }
         var newTable = makeTable(dataForTable);
         console.log("new table");
@@ -331,8 +331,12 @@
     <div class="col-1">
       <header>Header</header>
       <main class="content" id="content">
-        <input name="textbox1" id="textbox1" type="text" />
-        <input name="buttonExecute" onclick="getCounterPick(document.getElementById('textbox1').value)" type="button" value="Execute" />
+        <p>
+          <input name="textbox1" id="textbox1" type="text" />
+          <input name="buttonExecute" onclick="getCounterPick(document.getElementById('textbox1').value)" type="button" value="Execute" />
+        </p>
+        <p id="tableHolder">
+        </p>
       </main>
     </div>
   </body>
