@@ -22,7 +22,7 @@
       }); 
     }
     
-    function attemptCounterPick(event, textBoxValue) {
+    async function attemptCounterPick(event, textBoxValue) {
       if (event.which == 13 || event.keyCode == 13) {
         try {
           var dataForTable = await bestHeroesAgainstGivenHero(textBoxValue, 10);
