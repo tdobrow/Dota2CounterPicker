@@ -43,6 +43,15 @@
       }
     }
     
+    function roundOf(n, p) {
+        const n1 = n * Math.pow(10, p + 1);
+        const n2 = Math.floor(n1 / 10);
+        if (n1 >= (n2 * 10 + 5)) {
+            return (n2 + 1) / Math.pow(10, p);
+        }
+        return n2 / Math.pow(10, p);
+    }
+    
     function didHeroWinMatch(heroString, tsvDataRow) {
       result = (tsvDataRow["radiantTeamArray"].includes(heroString) && tsvDataRow["radiantWon"]) || (tsvDataRow["direTeamArray"].includes(heroString) && !tsvDataRow["radiantWon"]);
       return result;
@@ -60,11 +69,8 @@
               var cell = document.createElement('td');
               console.log(array[i][j]);
               console.log(Math.round(array[i][j] * 1000) / 1000);
-              if (i > 0 && j > 0) {
-                cell.textContent = Math.round(array[i][j] * 1000) / 1000;
-                if (j > 1) {
-                  cell.textContent = String(cell.textContent*100) + "%";
-                }
+              if (i > 0 && j > 1) {
+                cell.textContent = String(roundOf(array[i][j], 4) *100)) + "%";
               } else {
                 cell.textContent = array[i][j];
               }
