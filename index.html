@@ -58,8 +58,10 @@
           }
           for (var j = 0; j < array[i].length; j++) {
               var cell = document.createElement('td');
+              console.log(array[i][j]);
+              console.log(Math.round(array[i][j] * 1000) / 1000);
               if (i > 0 && j > 0) {
-                cell.textContent = Math.round(array[i][j] * 10000) / 10000;
+                cell.textContent = Math.round(array[i][j] * 1000) / 1000;
                 if (j > 1) {
                   cell.textContent = String(cell.textContent*100) + "%";
                 }
