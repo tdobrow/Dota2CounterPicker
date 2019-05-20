@@ -43,9 +43,11 @@
   }
   table, tr, td {
     border: 1px solid black;
+     text-align: center;
   }
   #tableHeader {
-  text-align: center;
-  height: 50px;
+    text-align: center;
+    font-weight: bold;
+    height: 50px;
  }
 </style>
