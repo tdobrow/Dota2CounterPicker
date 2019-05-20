@@ -68,7 +68,7 @@
           for (var j = 0; j < array[i].length; j++) {
               var cell = document.createElement('td');
               if (i > 0 && j > 1) {
-                cell.textContent = String(roundOf(array[i][j], 4)) + "%";
+                cell.textContent = String(roundOf(array[i][j], 2)) + "%";
               } else {
                 cell.textContent = array[i][j];
               }
