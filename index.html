@@ -33,8 +33,8 @@
         console.log('table data');
         console.log(dataForTable);
         var content = document.getElementById("tableHolder");
-        if (content.childNodes.length > 2) {
-          content.removeChild(content.childNodes[2])
+        if (content.childNodes.length > 1) {
+          content.removeChild(content.childNodes[1])
         }
         var newTable = makeTable(dataForTable);
         console.log("new table");
