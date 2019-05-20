@@ -58,7 +58,11 @@
           }
           for (var j = 0; j < array[i].length; j++) {
               var cell = document.createElement('td');
-              cell.textContent = Math.round (array[i][j] * 1000) / 1000;
+              if (i>0 && j>0) {
+                cell.textContent = Math.round (array[i][j] * 1000) / 1000;
+              } else {
+                cell.textContent = array[i][j];
+              }
               row.appendChild(cell);
           }
           table.appendChild(row);
