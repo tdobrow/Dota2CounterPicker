@@ -67,10 +67,8 @@
           }
           for (var j = 0; j < array[i].length; j++) {
               var cell = document.createElement('td');
-              console.log(array[i][j]);
-              console.log(Math.round(array[i][j] * 1000) / 1000);
               if (i > 0 && j > 1) {
-                cell.textContent = roundOf(array[i][j], 4);
+                cell.textContent = roundOf(array[i][j], 4) * 100;
               } else {
                 cell.textContent = array[i][j];
               }
