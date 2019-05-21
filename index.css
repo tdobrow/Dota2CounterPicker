@@ -27,6 +27,9 @@
   }
   header, footer {
     background: yellowgreen;
+    text-align: center;
+    font-weight: bold;
+    font-size: 35px;
     height: 20vh;
   }
   header, footer, article, nav {
