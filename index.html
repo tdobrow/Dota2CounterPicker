@@ -21,6 +21,23 @@
         return e.replace("[", "").replace("]", "").replace(" ", "").replace(/'/g, '');
       }); 
     }
+    
+    async function attemptCounterPick(event, textBoxValue) {
+      if (event.which == 13 || event.keyCode == 13) {
+        try {
+          var dataForTable = await bestHeroesAgainstGivenHero(textBoxValue, 10);
+        } catch (e) {
+          console.log("Error", e);
+        } finally {
+          var content = document.getElementById("tableHolder");
+          if (content.childNodes.length > 1) {
+            content.removeChild(content.childNodes[1])
+          }
+          var newTable = makeTable(dataForTable);
+          document.getElementById("tableHolder").appendChild(newTable);
+        } 
+      }
+    }
         
     async function getMatchup(textBoxValue, textBoxValue2) {
       try {
