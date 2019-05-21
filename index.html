@@ -21,27 +21,25 @@
         return e.replace("[", "").replace("]", "").replace(" ", "").replace(/'/g, '');
       }); 
     }
-    
-    async function attemptCounterPick(event, textBoxValue) {
-      if (event.which == 13 || event.keyCode == 13) {
-        try {
-          var dataForTable = await bestHeroesAgainstGivenHero(textBoxValue, 10);
-        } catch (e) {
-          console.log("Error", e);
-        } finally {
-          var content = document.getElementById("tableHolder");
-          if (content.childNodes.length > 1) {
-            content.removeChild(content.childNodes[1])
-          }
-          var newTable = makeTable(dataForTable);
-          document.getElementById("tableHolder").appendChild(newTable);
-        } 
-      }
+        
+    async function getMatchup(textBoxValue, textBoxValue2) {
+      try {
+        var dataForTable = await dataForHeroMatchup(textBoxValue, textBoxValue2);
+      } catch (e) {
+        console.log("Error", e);
+      } finally {
+//         var content = document.getElementById("tableHolder");
+//         if (content.childNodes.length > 1) {
+//           content.removeChild(content.childNodes[1])
+//         }
+//         var newTable = makeTable(dataForTable);
+//         document.getElementById("tableHolder").appendChild(newTable);
+        console.log("DONE!!!");
+      } 
     }
     
     async function getCounterPick(textBoxValue){
       //dataForHeroMatchup('ursa', 'razor');
-      
       try {
         var dataForTable = await bestHeroesAgainstGivenHero(textBoxValue, 10);
       } catch (e) {
@@ -366,6 +364,15 @@
           <input name="buttonExecute" onclick="getCounterPick(document.getElementById('textbox1').value)" type="button" value="Execute" />
         </p>
         <p id="tableHolder">
+        </p>
+      </main>
+      <main class="content2" id="content2">
+        <p>
+          <input name="textbox2" id="textbox2" type="text" />
+          <input name="textbox3" id="textbox3" type="text" />
+          <input name="buttonExecute2" onclick="getMatchup(document.getElementById('textbox2').value, document.getElementById('textbox3').value )" type="button" value="Execute" />
+        </p>
+        <p id="tableHolder2">
         </p>
       </main>
     </div>
