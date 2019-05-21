@@ -49,7 +49,7 @@
           if (content.childNodes.length > 1) {
             content.removeChild(content.childNodes[1])
           }
-          var newTable = makeTable(dataForTable);
+          var newTable = makeTable(dataForTable, 3);
           document.getElementById("tableHolder2").appendChild(newTable);
       } 
     }
@@ -66,7 +66,7 @@
         if (content.childNodes.length > 1) {
           content.removeChild(content.childNodes[1])
         }
-        var newTable = makeTable(dataForTable);
+        var newTable = makeTable(dataForTable, 1);
         console.log("new table");
         console.log(newTable);
         document.getElementById("tableHolder").appendChild(newTable);
@@ -87,7 +87,7 @@
       return result;
     }
     
-    function makeTable(array) {
+    function makeTable(array, indexToFormatWithPercentage) {
       var table = document.createElement('table');
       
       for (var i = 0; i < array.length; i++) {
@@ -97,7 +97,7 @@
           }
           for (var j = 0; j < array[i].length; j++) {
               var cell = document.createElement('td');
-              if (i > 0 && j > 1) {
+              if (i > 0 && j > indexToFormatWithPercentage) {
                 cell.textContent = String(roundOf(array[i][j], 2)) + "%";
               } else {
                 cell.textContent = array[i][j];
@@ -180,7 +180,7 @@
           console.log("No match data between these two heroes");
         } 
       }
-      lables = ["Hero 1", "Hero 2", "Number of Games Against", "Hero 1 Winrate (independent of hero 2)", "Hero 2 Winrate (independent of hero 1)", "Hero 1 winrate over Hero 2"];
+      lables = ["Hero 1", "Hero 2", "Number of Games Against", "Hero 1 Winrate (independent of hero 2)", "Hero 2 Winrate (independent of hero 1)", "Hero 1 winrate against Hero 2"];
       returnValues = [];
 
       returnValues.push(heroString1);
