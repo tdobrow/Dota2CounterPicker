@@ -183,12 +183,12 @@
       lables = ["Hero 1", "Hero 2", "Number of Games Against", "Hero 1 Winrate (independent of hero 2)", "Hero 2 Winrate (independent of hero 1)", "Hero 1 winrate over Hero 2"];
       returnValues = [];
 
-      returnValues.append(heroString1);
-      returnValues.append(heroString2);
-      returnValues.append(num_total_games_together);
-      returnValues.append(hero_one_wins/hero_one_num_picked);
-      returnValues.append(hero_two_wins/hero_two_num_picked);
-      returnValues.append(hero_one_wins_against_hero_two/num_total_games_together);
+      returnValues.push(heroString1);
+      returnValues.push(heroString2);
+      returnValues.push(num_total_games_together);
+      returnValues.push(hero_one_wins/hero_one_num_picked);
+      returnValues.push(hero_two_wins/hero_two_num_picked);
+      returnValues.push(hero_one_wins_against_hero_two/num_total_games_together);
       
       var returnData = [lables, returnValues];
       return returnData;
